@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login | keyBay</title>
+    <link rel="stylesheet" href="/stylesheet/login.css">
+  </head>
+  <body>
+    <div class="header">
+      <img class="logo-header" src="/images/keyBay.svg">
+      
+      <div class="login-container">
+        <form action="/login" method="POST">
+          <p class="login-text child">Log In</p>
+          <input class="login-textbox child" type="email" id="email" name="email" placeholder="Email" required>
+          <input class="login-textbox child" type="password" id="password" name="password" placeholder="Password" required>
+          <% if (errorMessage) { %>
+            <div class="error">
+              <%= errorMessage %>
+            </div>
+          <% } %>
+          <button type="submit" class="login-btn">LOGIN</button>
+          <p class="register-redir-text">No account yet? <a class="signup-link" href="/signup">Signup</a></p>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
