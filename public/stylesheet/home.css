@@ -1,0 +1,144 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #D1CDC4;
+    overflow: auto;
+}
+
+.nav-container {
+    background-color: #1F1F1F;
+    display: flex;
+    flex-direction: column;
+    height: 140px;
+    padding-top: 1%;
+}
+
+.nav-container2 {
+    display: flex;
+    color: white;
+    justify-content: end;
+    padding-right: 1%;
+}
+
+.nav-container3 {
+    display: flex;
+    height: 100%;
+    padding-top: 1%;
+    align-items: start;
+    /* align-items: center; */
+}
+
+.login-signup {
+    text-decoration: none;
+    color: white;
+    padding: 0px 10px;
+    cursor: pointer;
+}
+
+.logo {
+    max-width: 200px;
+}
+
+ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+li {
+    margin: 0 20px;
+}
+
+.search-li {
+    padding-left: 380px;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 0 auto;
+}
+
+input[type="text"] {
+    flex: 1;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 40px 5px 10px;
+    font-size: 16px;
+}
+
+button[type="submit"] {
+    background-color: #8C52FF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#cart-icon {
+    padding-left: 500px;
+}
+
+.item-parent {
+    padding-top: 2%;
+    display: flex;
+    flex-wrap: wrap;
+}
+  
+.item-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(25% - 10px); /* 4 items per row with 10px margin between each item */
+    margin: 5px; /* margin between each item */
+    /* background-color: white; */
+    height: auto;
+    border:none;
+    border-radius: 5px;
+}
+
+.item {
+    padding: 4%;
+    cursor: pointer;
+    color: white;
+    width: 80%;
+    height: 100%;
+    background-color: #1F1F1F;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-container a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.item-name {
+    margin-top: 3%;
+    font-weight: bold;
+    font-size: 170%;
+}
+
+.item-price {
+    color: #FF5733;
+    font-size: 140%;
+}

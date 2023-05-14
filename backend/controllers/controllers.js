@@ -1,7 +1,7 @@
 const userSchema = require("../db")
 
 const getHome = (req, res) => {
-    res.redirect('/login')
+    res.render('home.ejs')
 }
 
 const getLogin = (req, res) => {
