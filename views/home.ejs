@@ -6,130 +6,165 @@
     <script src="https://kit.fontawesome.com/e3297677e0.js" crossorigin="anonymous"></script>
   </head>
   <body>
-     <nav class="nav-container">
-        <div class="nav-container2 top" >
+    <nav class="nav-container">
+       <div class="nav-container2 top" >
+        <% if (isLoggedIn) { %>
+         <a class="login-signup" href="/logout"><p>Logout</p></a>
+        <% } else { %>
           <a class="login-signup" href="/login"><p>Login</p></a>
           <p>|</p>
           <a class="login-signup" href="/signup"><p>Signup</p></a>
-        </div>
-        <div class="nav-container3">
-          <ul>
-            <li><img src="images/keyBay2.svg" class="logo"></li>
-            <li class="search-li">
-                <form class="search-form">
-                    <div class="search-container">
-                    <input type="text" placeholder="Search">
-                    <button type="submit"><i class="fa fa-search"></i></button>
-                    </div>
-                </form>
-            </li>
-            <li>
-                <a href="#"><i id="cart-icon" class="fa-solid fa-cart-shopping fa-2xl" style="color: #8c52ff;"></i></a>
-            </li>
-          </ul>
-        </div>
-     </nav>
-     <div class="item-parent">
-      <div class="item-container">
-        <a>
-        <div class="item">
-            <img src="images/Keychron Q1.jpg">
-            <p class="item-name">Keychron Q1</p>
-            <p class="item-price">₱8,000</p>
-        </div>
-        </a> 
-      </div>
-      <div class="item-container">
-        <a>
-        <div class="item">
-            <img src="images/Keychron Q1.jpg">
-            <p class="item-name">Keychron Q1</p>
-            <p class="item-price">₱8,000</p>
-        </div>
-        </a> 
-      </div>
-      <div class="item-container">
-        <a>
-        <div class="item">
-            <img src="images/Keychron Q1.jpg">
-            <p class="item-name">Keychron Q1</p>
-            <p class="item-price">₱8,000</p>
-        </div>
-        </a> 
-      </div>
-      <div class="item-container">
-        <a>
-        <div class="item">
-            <img src="images/Keychron Q1.jpg">
-            <p class="item-name">Keychron Q1</p>
-            <p class="item-price">₱8,000</p>
-        </div>
-        </a> 
-      </div>
-      <div class="item-container">
-        <a>
-        <div class="item">
-            <img src="images/Keychron Q1.jpg">
-            <p class="item-name">Keychron Q1</p>
-            <p class="item-price">₱8,000</p>
-        </div>
-        </a> 
-      </div>
-      <div class="item-container">
-        <a>
-        <div class="item">
-            <img src="images/Keychron Q1.jpg">
-            <p class="item-name">Keychron Q1</p>
-            <p class="item-price">₱8,000</p>
-        </div>
-        </a> 
-      </div>
-      <div class="item-container">
-        <a>
-        <div class="item">
-            <img src="images/Keychron Q1.jpg">
-            <p class="item-name">Keychron Q1</p>
-            <p class="item-price">₱8,000</p>
-        </div>
-        </a> 
-      </div>
-      <div class="item-container">
-        <a>
-        <div class="item">
-            <img src="images/Keychron Q1.jpg">
-            <p class="item-name">Keychron Q1</p>
-            <p class="item-price">₱8,000</p>
-        </div>
-        </a> 
-      </div>
-      <div class="item-container">
-        <a>
-        <div class="item">
-            <img src="images/Keychron Q1.jpg">
-            <p class="item-name">Keychron Q1</p>
-            <p class="item-price">₱8,000</p>
-        </div>
-        </a> 
-      </div>
-      <div class="item-container">
-        <a>
-        <div class="item">
-            <img src="images/Keychron Q1.jpg">
-            <p class="item-name">Keychron Q1</p>
-            <p class="item-price">₱8,000</p>
-        </div>
-        </a> 
-      </div>
+        <% } %>
+       </div>
+       <div class="nav-container3">
+         <ul>
+           <li><img src="/images/keyBay2.svg" class="logo"></li>
+           <li class="search-li">
+               <form class="search-form">
+                   <div class="search-container">
+                   <input type="text" placeholder="Search">
+                   <button type="submit"><i class="fa fa-search"></i></button>
+                   </div>
+               </form>
+           </li>
+           <li>
+               <a href="/cart"><i id="cart-icon" class="fa-light fa-cart-shopping fa-2xl" style="color: #8c52ff;"></i></i></a>
+           </li>
+         </ul>
+       </div>
+    </nav>
+   
+    <% if (isLoggedIn) { %>}
+   <from action="/" method="GET">
+     <div class="button-container">
+       <button id="popupButton"><i  class="fa-sharp fa-solid fa-plus fa-2xl"  id="add-icon" style="color: #8c52ff;"></i></button>
+     </div>
+   </from>
+   
+   <form action="/" method="POST"></form>
+    <div id="popup">
+     <div id="popupContent">
+       <div class="popup-head">
+         <button id="closeButton"><i class="fa-solid fa-xmark fa-2xl" style="color: #8c52ff;"></i></button>
+       </div>
+       <div class="popup-content-container">
+       </div>
+       <input type="text" class="popup-input" id="item-name" name="item-name" placeholder="Item Name" required>
+       <input type="number" class="popup-input" id="item-price" name="item-price" placeholder="Price" required>
+       <button class="submit-item">Submit</button>
+     </div>
+    </div>
+   </form>
+   <% } %>
+    
+   <% if (!isLoggedIn) { %>
+    <div class="item-parent" style="margin-top: 10%;">
+   <% } else { %>
+    <div class="item-parent">
+   <% } %>
+     <div class="item-container">
+       <a href="/item">
+       <div class="item">
+           <img src="images/Keychron Q1.jpg">
+           <p class="item-name">Keychron Q1</p>
+           <p class="item-price">₱8,000</p>
+       </div>
+       </a> 
+     </div>
+     <div class="item-container">
+       <a href="/item">
+       <div class="item">
+           <img src="images/Keychron Q1.jpg">
+           <p class="item-name">Keychron Q1</p>
+           <p class="item-price">₱8,000</p>
+       </div>
+       </a> 
+     </div>
+     <div class="item-container">
+       <a href="/item">
+       <div class="item">
+           <img src="images/Keychron Q1.jpg">
+           <p class="item-name">Keychron Q1</p>
+           <p class="item-price">₱8,000</p>
+       </div>
+       </a> 
+     </div>
+     <div class="item-container">
+       <a href="/item">
+       <div class="item">
+           <img src="images/Keychron Q1.jpg">
+           <p class="item-name">Keychron Q1</p>
+           <p class="item-price">₱8,000</p>
+       </div>
+       </a> 
+     </div>
+     <div class="item-container">
+       <a href="/item">
+       <div class="item">
+           <img src="images/Keychron Q1.jpg">
+           <p class="item-name">Keychron Q1</p>
+           <p class="item-price">₱8,000</p>
+       </div>
+       </a> 
+     </div>
+     <div class="item-container">
+       <a href="/item">
+       <div class="item">
+           <img src="images/Keychron Q1.jpg">
+           <p class="item-name">Keychron Q1</p>
+           <p class="item-price">₱8,000</p>
+       </div>
+       </a> 
+     </div>
+     <div class="item-container">
+       <a href="/item">
+       <div class="item">
+           <img src="images/Keychron Q1.jpg">
+           <p class="item-name">Keychron Q1</p>
+           <p class="item-price">₱8,000</p>
+       </div>
+       </a> 
+     </div>
+     <div class="item-container">
+       <a href="/item">
+       <div class="item">
+           <img src="images/Keychron Q1.jpg">
+           <p class="item-name">Keychron Q1</p>
+           <p class="item-price">₱8,000</p>
+       </div>
+       </a> 
+     </div>
+     <div class="item-container">
+       <a href="/item">
+       <div class="item">
+           <img src="images/Keychron Q1.jpg">
+           <p class="item-name">Keychron Q1</p>
+           <p class="item-price">₱8,000</p>
+       </div>
+       </a> 
+     </div>
+     <div class="item-container">
+       <a href="/item">
+       <div class="item">
+           <img src="images/Keychron Q1.jpg">
+           <p class="item-name">Keychron Q1</p>
+           <p class="item-price">₱8,000</p>
+       </div>
+       </a> 
+     </div>
 
-      <div class="item-container">
-        <a>
-        <div class="item">
-            <img src="images/Keychron Q1.jpg">
-            <p class="item-name">Keychron Q1</p>
-            <p class="item-price">₱8,000</p>
-        </div>
-        </a> 
-      </div>
-    </div>     
-  </body>
+     <div class="item-container">
+       <a href="/item">
+       <div class="item">
+           <img src="images/Keychron Q1.jpg">
+           <p class="item-name">Keychron Q1</p>
+           <p class="item-price">₱8,000</p>
+       </div>
+       </a> 
+     </div>
+   </div>  
+   <% if (isLoggedIn) { %>
+    <script src="/scripts/home.js"></script>
+   <% } %>   
+ </body>
 </html>

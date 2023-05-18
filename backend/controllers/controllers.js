@@ -1,10 +1,15 @@
 const userSchema = require("../db")
 
 const getHome = (req, res) => {
-    res.render('home.ejs')
+    let isLoggedIn = req.session.isLoggedIn || false;
+    res.render('home.ejs', { isLoggedIn });
 }
 
 const getLogin = (req, res) => {
+    if(req.session.isLoggedIn) {
+        return res.redirect('/')
+    }
+
     let errorMessage;
 
     if(req.query.error === "invalid_email") {
@@ -17,6 +22,10 @@ const getLogin = (req, res) => {
 }
 
 const getSignup = (req, res) => {
+    if(req.session.isLoggedIn) {
+        return res.redirect('/')
+    }
+
     let errorMessage;
 
     if(req.query.error === 'email_taken') {
@@ -24,6 +33,26 @@ const getSignup = (req, res) => {
     }
 
     res.render('signup.ejs', {errorMessage})
+}
+
+const getItem = (req, res) => {
+    let isLoggedIn = req.session.isLoggedIn
+    res.render('item.ejs', { isLoggedIn })
+}
+
+const getLogout = (req, res) => {
+    req.session.isLoggedIn = false
+    req.session.destroy();
+    res.redirect('/')
+}
+
+const getCart = (req, res) => {
+    if(!req.session.isLoggedIn) {
+        let errorMessage;
+        return res.render("login.ejs", {errorMessage})
+    }
+
+    res.render("cart.ejs")
 }
 
 const postSignup = async (req, res) => {
@@ -64,21 +93,30 @@ const postLogin = async (req, res) => {
         } 
         else if(checkEmail.password===req.body.password) 
         {
-            res.render("index.ejs")
+            req.session.isLoggedIn = true;
+            res.redirect("/")
         } else 
         {
             res.redirect('/login?error=invalid_pass')
         }
     }
-    catch {
-        // invalid email and/or password
+    catch (err) {
+        console.log("Error 500")
+        res.status(500).send()
     }
+}
+
+const postMenu = async (req, res) => {
+
 }
 
 module.exports = {
     getHome,
     getLogin,
     getSignup,
+    getItem,
+    getLogout,
+    getCart,
     postSignup,
     postLogin
 }

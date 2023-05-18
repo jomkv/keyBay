@@ -38,10 +38,7 @@ body {
     flex-direction: column;
     height: 140px;
     padding-top: 1%;
-    margin-bottom: 3%;
-    position: fixed;
-    top: 0;
-    width: 100%;
+    margin-bottom: 1%;
 }
 
 .nav-container2 {
@@ -88,7 +85,6 @@ li {
     align-items: center;
     position: relative;
     margin: 0 auto;
-    margin-right: 500px;
 }
 
 input[type="text"] {
@@ -114,10 +110,38 @@ button[type="submit"] {
     cursor: pointer;
 }
 
-.item-parent {
-    padding-top: 2%;
+#cart-icon {
+    padding-left: 500px;
+}
+
+.main-container {
+    border-radius: 5px;
+    margin-top: 5%;
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-parent {
+    display: flex;
+    /* align-items: center; */
+    background-color: white;
+    padding: 2%;
+    width: 80%;
+    /* max-width: 1100px; */
+    max-height: 620px;
+    border-radius: 5px;
+    border: 3px dashed black;
+}
+
+.item-description-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    margin-left: 2%;
+    /* width: 90%; */
+    
 }
   
 .item-container {
@@ -133,133 +157,78 @@ button[type="submit"] {
     margin-bottom: 2%;
 }
 
-.item {
-    border-radius: 3px;
-    padding: 8%;
-    cursor: pointer;
-    color: white;
-    width: 80%;
-    height: 97%;
-    background-color: #1F1F1F;
-    display: flex;
-    flex-direction: column;
+.item-pic {
+    width: 100%;
+    height: 100%;
 }
 
-.item-container a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.item-img {
     height: 100%;
     width: 100%;
 }
 
 .item-name {
-    margin-top: 3%;
     font-weight: bold;
     font-size: 160%;
 }
 
 .item-price {
     color: #FF5733;
-    font-size: 140%;
+    font-size: 100%;
+}
+
+.item-title {
+    font-size: 180%;
 }
 
 .login-signup:hover {
     color: #9060ef;
 }
 
-.button-container {
+.item-buttons {
+    margin-top: 11%;
     display: flex;
-    align-items: end;
-    justify-content: end;
-    
-    padding-right: 5%;
-    margin-top: 12%;
 }
 
-#add-icon {
-    width: 150%;
-    cursor: pointer;
-}
-
-
-button {
-    background-color: transparent;
-}
-
-#popup {
-    display: none; /* Initially hide the popup */
-    position: fixed;
-    top: 0;
-    left: 0;
+.item-description {
+    margin-top: 8%;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    z-index: 9999; /* Make sure it appears above other elements */
-  }
-  
-  #popupContent {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #D1CDC4;
-    padding: 20px;
-    width: 300px;
-    height: 270px;
-    border-radius: 5px;
-    border: 4px solid rgb(97, 95, 95);
-  }
-  
-.popup-head {
-    display: flex;
-    justify-content: end;
+    font-size: 130%
 }
 
-  #closeButton {
-    cursor: pointer;
-    margin-top: 10px;
-  }
-
-.popup-content-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-}
-
-.submit-item {
-    background-color: #8C52FF;
+.cart-button {
+    background-color: #1F1F1F;
     color: white;
     font-weight: bold;
-    width: 50%;
-    height: 20%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    font-size: 120%;
+    height: 70px;
+    width: 190px;
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 8%;
     cursor: pointer;
-    border-radius: 3px;
-    font-size: 110%;
-    margin-top: 2%;
-    transition: background-color 0.15s;
+    transition: opacity 0.15s;
 }
-.submit-item:hover {
-    background-color: #8c5cea;
+.cart-button:hover {
+    opacity: 0.9;
 }
 
-.popup-input {
-    width: 100%;
-    height: 50px;
-    margin: 5% 0%;
+.buy-button {
+    background-color: #1F1F1F;
+    color: white;
+    font-weight: bold;
+    font-size: 120%;
+    height: 70px;
+    width: 190px;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+}
+.buy-button:hover {
+    opacity: 0.9;
 }
 
-#item-price {
-    padding: 5%;
-    font-size: 107%;
-    height: 21%;
-}
-
-#item-name {
-    border-radius: 0px;;
+#add-cart-icon {
+    margin-right: 5%;
 }

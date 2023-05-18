@@ -10,9 +10,11 @@
   "license": "MIT",
   "dependencies": {
     "colors": "^1.4.0",
+    "connect-mongo": "^5.0.0",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "express-session": "^1.17.3",
     "mongoose": "^7.1.0"
   },
   "devDependencies": {
