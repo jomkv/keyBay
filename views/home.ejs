@@ -28,7 +28,7 @@
                </form>
            </li>
            <li>
-               <a href="/cart"><i id="cart-icon" class="fa-light fa-cart-shopping fa-2xl" style="color: #8c52ff;"></i></i></a>
+               <a href="/cart"><i id="cart-icon" class="fa-regular fa-cart-shopping fa-2xl" style="color: #8c52ff;"></i></a>
            </li>
          </ul>
        </div>
@@ -41,20 +41,20 @@
      </div>
    </from>
    
-   <form action="/" method="POST"></form>
+   <form action="/" method="POST">
     <div id="popup">
-     <div id="popupContent">
-       <div class="popup-head">
-         <button id="closeButton"><i class="fa-solid fa-xmark fa-2xl" style="color: #8c52ff;"></i></button>
-       </div>
-       <div class="popup-content-container">
-       </div>
-       <input type="text" class="popup-input" id="item-name" name="item-name" placeholder="Item Name" required>
-       <input type="number" class="popup-input" id="item-price" name="item-price" placeholder="Price" required>
-       <button class="submit-item">Submit</button>
-     </div>
+      <div id="popupContent">
+        <div class="popup-head">
+          <button id="closeButton"><i class="fa-solid fa-xmark fa-2xl" style="color: #8c52ff;"></i></button>
+        </div>
+        <div class="popup-content-container">
+        </div>
+        <input type="text" class="popup-input" id="itemName" name="itemName" placeholder="Item Name" required>
+        <input type="number" class="popup-input" id="itemPrice" name="itemPrice" placeholder="Price" required>
+        <button type="submit" class="submit-item">Submit</button>
+      </div>
     </div>
-   </form>
+  </form>
    <% } %>
     
    <% if (!isLoggedIn) { %>

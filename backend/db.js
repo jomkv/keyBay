@@ -40,5 +40,5 @@ const itemSchema = new mongoose.Schema({
 const User = new mongoose.model('User', userSchema)
 const Item = new mongoose.model('Item', itemSchema)
 
-module.exports = User
+module.exports = {User, Item}
 

@@ -1,4 +1,5 @@
-const userSchema = require("../db")
+const { default: mongoose } = require("mongoose");
+const {userSchema, itemSchema} = require("../db")
 
 const getHome = (req, res) => {
     let isLoggedIn = req.session.isLoggedIn || false;
@@ -55,6 +56,27 @@ const getCart = (req, res) => {
     res.render("cart.ejs")
 }
 
+// add item
+const postHome = async (req, res) => {
+    const username = req.session.username
+    const data = {
+        name: req.body.itemName,
+        price: req.body.itemPrice,
+        seller: username
+    }
+
+    const Item = mongoose.model('Item', itemSchema)
+
+    try {
+        await Item.insertMany([data])
+        res.redirect("/")
+    } catch(err) {
+        console.log("Error 500")
+        res.status(500).send()
+    }
+}
+
+
 const postSignup = async (req, res) => {
     const data = {
         username: req.body.username,
@@ -62,8 +84,10 @@ const postSignup = async (req, res) => {
         password: req.body.password
     }
 
+    const User = mongoose.model('User', userSchema)
+
     try {
-        const emailTaken = await userSchema.findOne({email: data.email})
+        const emailTaken = await User.findOne({email: data.email})
 
         if(emailTaken) // if email is taken
         {
@@ -72,7 +96,7 @@ const postSignup = async (req, res) => {
         }
         else {
             console.log('signup successful')
-            await userSchema.insertMany([data])
+            await User.insertMany([data])
 
             res.redirect('/login')
         }
@@ -84,16 +108,19 @@ const postSignup = async (req, res) => {
 }
 
 const postLogin = async (req, res) => {
+    const User = mongoose.model('User', userSchema)
     try {
-        const checkEmail = await userSchema.findOne({email: req.body.email})
+        const checkEmail = await User.findOne({email: req.body.email})
 
         if(!checkEmail) // if invalid email 
         {
             res.redirect('/login?error=invalid_email')
         } 
-        else if(checkEmail.password===req.body.password) 
+        else if(checkEmail.password===req.body.password) // if login success
         {
-            req.session.isLoggedIn = true;
+            req.session.username = checkEmail.username
+            console.log(req.session.username)
+            req.session.isLoggedIn = true
             res.redirect("/")
         } else 
         {
@@ -106,9 +133,9 @@ const postLogin = async (req, res) => {
     }
 }
 
-const postMenu = async (req, res) => {
+// const postMenu = async (req, res) => {
 
-}
+// }
 
 module.exports = {
     getHome,
@@ -117,6 +144,7 @@ module.exports = {
     getItem,
     getLogout,
     getCart,
+    postHome,
     postSignup,
     postLogin
 }

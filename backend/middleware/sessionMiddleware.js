@@ -11,10 +11,10 @@ const sessionMiddleware = session({
   }),
 });
 
-function initIsLoggedIn(req, res, next) {
+async function initIsLoggedIn(req, res, next) {
   if(!req.session.isLoggedIn) {
     req.session.isLoggedIn = false;
-  }
+  } 
 
   next();
 }
