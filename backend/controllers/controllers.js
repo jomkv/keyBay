@@ -1,9 +1,17 @@
 const { default: mongoose } = require("mongoose");
-const {userSchema, itemSchema} = require("../db")
+const { mongoClient } = require("mongodb");
+const {userSchema, itemSchema} = require("../db");
 
-const getHome = (req, res) => {
+const getHome = async (req, res) => {
     let isLoggedIn = req.session.isLoggedIn || false;
-    res.render('home.ejs', { isLoggedIn });
+    try {
+        const Item = mongoose.model('Item', itemSchema)
+        const items = await Item.find().exec();
+        res.render('home.ejs', {isLoggedIn, items});
+    } catch (error) {
+        console.log("Error retrieving items", error);
+        res.status(500).send
+    }
 }
 
 const getLogin = (req, res) => {
@@ -42,6 +50,7 @@ const getItem = (req, res) => {
 }
 
 const getLogout = (req, res) => {
+    console.log(`${req.session.username} Logged out`)
     req.session.isLoggedIn = false
     req.session.destroy();
     res.redirect('/')

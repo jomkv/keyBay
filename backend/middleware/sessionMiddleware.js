@@ -12,10 +12,10 @@ const sessionMiddleware = session({
 });
 
 async function initIsLoggedIn(req, res, next) {
-  if(!req.session.isLoggedIn) {
+  if (!req.session.hasOwnProperty('isLoggedIn')) {
     req.session.isLoggedIn = false;
-  } 
-
+  }
+  
   next();
 }
 
