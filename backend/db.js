@@ -12,5 +12,5 @@ mongoose.connect(uri).then(() => {
 const User = new mongoose.model('User', userSchema)
 const Item = new mongoose.model('Item', itemSchema)
 
-module.exports = {User, Item}
+module.exports = {User}
 

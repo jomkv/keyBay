@@ -6,9 +6,9 @@ const path = require('path')
 const port = process.env.PORT || 4000
 const {sessionMiddleware, initIsLoggedIn }= require('./backend/middleware/sessionMiddleware')
 
+app.use(express.urlencoded({extended: false}))
 app.use(sessionMiddleware)
 app.use(initIsLoggedIn)
-app.use(express.urlencoded({extended: false}))
 app.use('/', require('./backend/routes/routes'))
 app.use(express.static(path.join(__dirname, 'public')))
 

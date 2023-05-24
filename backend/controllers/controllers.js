@@ -1,6 +1,7 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 const { mongoClient } = require("mongodb");
-const {userSchema, itemSchema} = require("../db");
+const {userSchema} = require("../db");
+const itemSchema = require("../models/itemModel")
 
 const getHome = async (req, res) => {
     let isLoggedIn = req.session.isLoggedIn || false;
@@ -71,11 +72,12 @@ const postHome = async (req, res) => {
     const data = {
         name: req.body.itemName,
         price: req.body.itemPrice,
+        description: req.body.itemDesc,
         seller: username
     }
-
+    
     const Item = mongoose.model('Item', itemSchema)
-
+    
     try {
         await Item.insertMany([data])
         res.redirect("/")

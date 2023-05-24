@@ -2,7 +2,9 @@ const express = require('express')
 const router = express.Router()
 const {getHome, getLogin, getSignup, getItem, getLogout, getCart, postHome, postSignup, postLogin} = require('../controllers/controllers')
 
-router.route('/').get(getHome).post(postHome)
+router.route('/').get(getHome).post(postHome, () => {
+    console.log("here")
+})
 
 router.route('/cart').get(getCart)
 
