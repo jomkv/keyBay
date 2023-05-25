@@ -8,7 +8,7 @@ router.route('/').get(getHome).post(postHome, () => {
 
 router.route('/cart').get(getCart)
 
-router.route('/item').get(getItem)
+router.route('/item/:id').get(getItem)
 
 router.route('/logout').get(getLogout)
 

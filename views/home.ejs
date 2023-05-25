@@ -65,7 +65,7 @@
    <% } else { %>
     <% items.forEach( function(item) { %>
      <div class="item-container">
-       <a href="/item">
+       <a href="/item/<%= item._id %>">
        <div class="item">
            <img src="images/Keychron Q1.jpg">
            <p class="item-name"><%= item.name %></p>

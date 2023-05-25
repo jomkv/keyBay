@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const { mongoClient } = require("mongodb");
-const {userSchema} = require("../db");
-const itemSchema = require("../models/itemModel")
+const {userSchema, itemSchema} = require("../db");
 
 const getHome = async (req, res) => {
     let isLoggedIn = req.session.isLoggedIn || false;
@@ -45,9 +44,29 @@ const getSignup = (req, res) => {
     res.render('signup.ejs', {errorMessage})
 }
 
-const getItem = (req, res) => {
+const getItem = async (req, res) => {
     let isLoggedIn = req.session.isLoggedIn
-    res.render('item.ejs', { isLoggedIn })
+    const itemId = req.params.id
+    const Item = mongoose.model("Item", itemSchema)
+
+    try {
+        const itemObj = await Item.findOne({_id: itemId})
+        const itemData = {
+            name: itemObj.name,
+            description: itemObj.description,
+            price: itemObj.price,
+            seller: itemObj.seller
+        }
+
+        res.render('item.ejs', { isLoggedIn, itemData })
+    } catch {
+        console.log("Error 500, problem getting item")
+        res.status(500).send()
+    }
+
+    
+    
+    
 }
 
 const getLogout = (req, res) => {
