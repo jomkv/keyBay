@@ -7,11 +7,17 @@
   </head>
   <body>
     <nav class="nav-container">
-       <div class="nav-container2 top" >
-         <a class="login-signup" href="#"><p>Login</p></a>
-         <p>|</p>
-         <a class="login-signup" href="#"><p>Signup</p></a>
-       </div>
+      <% if (isLoggedIn) { %>
+        <div class="nav-container2 top" >
+          <a class="login-signup" href="/logout"><p>Logout</p></a>
+        </div>
+      <% } else { %>
+      <div class="nav-container2 top" >
+        <a class="login-signup" href="/login"><p>Login</p></a>
+        <p>|</p>
+        <a class="login-signup" href="/signup"><p>Signup</p></a>
+      </div>
+      <% } %>
        <div class="nav-container3">
          <ul>
            <li><img src="/images/keyBay2.svg" class="logo"></li>

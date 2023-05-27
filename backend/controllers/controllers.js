@@ -39,6 +39,8 @@ const getSignup = (req, res) => {
 
     if(req.query.error === 'email_taken') {
         errorMessage = "Email has already been taken"
+    } else if (req.query.error === 'username_taken') {
+        errorMessage = "Username has already been taken"
     }
 
     res.render('signup.ejs', {errorMessage})
@@ -58,7 +60,7 @@ const getItem = async (req, res) => {
             seller: itemObj.seller
         }
 
-        res.render('item.ejs', { isLoggedIn, itemData })
+        res.render('item.ejs', { isLoggedIn, itemData, itemId })
     } catch {
         console.log("Error 500, problem getting item")
         res.status(500).send()
@@ -77,12 +79,13 @@ const getLogout = (req, res) => {
 }
 
 const getCart = (req, res) => {
+    let isLoggedIn = req.session.isLoggedIn || false;
     if(!req.session.isLoggedIn) {
         let errorMessage;
         return res.render("login.ejs", {errorMessage})
     }
 
-    res.render("cart.ejs")
+    res.render("cart.ejs", { isLoggedIn })
 }
 
 // add item
@@ -118,11 +121,17 @@ const postSignup = async (req, res) => {
 
     try {
         const emailTaken = await User.findOne({email: data.email})
+        const usernameTaken = await User.findOne({username: data.username})
 
         if(emailTaken) // if email is taken
         {
             console.log("email is taken")
             return res.redirect('/signup?error=email_taken')
+        }
+        else if (usernameTaken) // if username is taken
+        {
+            console.log("username is taken")
+            return res.redirect('/signup?error=username_taken')
         }
         else {
             console.log('signup successful')
@@ -163,6 +172,24 @@ const postLogin = async (req, res) => {
     }
 }
 
+const deleteItem = async (req, res) => {
+    const itemIdToRemove = req.params.id
+    const Item = mongoose.model('Item', itemSchema);
+
+    Item.findByIdAndRemove(itemIdToRemove)
+        .then((removedItem) => {
+            if(removedItem) {
+                console.log(`Item ${itemIdToRemove} removed successfuly`);
+            } else {
+                console.log('Item not found');
+            }
+            return res.redirect('/')
+        }) 
+        .catch((error) => {
+            console.log('Item not found')
+        })
+}
+
 // const postMenu = async (req, res) => {
 
 // }
@@ -176,5 +203,6 @@ module.exports = {
     getCart,
     postHome,
     postSignup,
-    postLogin
+    postLogin,
+    deleteItem
 }

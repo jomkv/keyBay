@@ -39,6 +39,9 @@ body {
     height: 140px;
     padding-top: 1%;
     margin-bottom: 1%;
+    min-height: 140px;
+    max-height: 140px;
+    
 }
 
 .nav-container2 {
@@ -46,6 +49,7 @@ body {
     color: white;
     justify-content: end;
     padding-right: 1%;
+    position: relative;
 }
 
 .nav-container3 {
@@ -53,6 +57,7 @@ body {
     height: 100%;
     padding-top: 1%;
     align-items: start;
+    position: relative;
 }
 
 .login-signup {
@@ -60,24 +65,29 @@ body {
     color: white;
     padding: 0px 10px;
     cursor: pointer;
+    position: relative;
 }
 
 .logo {
     max-width: 200px;
+    position: relative;
 }
 
 ul {
     display: flex;
     list-style: none;
     align-items: center;
+    position: relative;
 }
 
 li {
     margin: 0 20px;
+    position: relative;
 }
 
 .search-li {
     padding-left: 380px;
+    position: relative;
 }
 
 .search-form {
@@ -85,6 +95,7 @@ li {
     align-items: center;
     position: relative;
     margin: 0 auto;
+    position: relative;
 }
 
 input[type="text"] {
@@ -127,11 +138,12 @@ button[type="submit"] {
     /* align-items: center; */
     background-color: white;
     padding: 2%;
-    width: 80%;
-    /* max-width: 1100px; */
-    max-height: 620px;
+    width: fixed;
+    max-width: 1100px;
+    max-height: 520px;
     border-radius: 5px;
     border: 3px dashed black;
+    height: fixed;
 }
 
 .item-description-container {
@@ -139,8 +151,9 @@ button[type="submit"] {
     flex-direction: column;
     justify-content: start;
     align-items: start;
-    margin-left: 2%;
+    /* margin-left: 2%; */
     /* width: 90%; */
+    position: relative;
     
 }
   
@@ -163,9 +176,9 @@ button[type="submit"] {
 }
 
 .item-img {
-    height: 100%;
-    width: 100%;
-    /* max-width: 50%; */
+    height: fixed;
+    width: fixed;
+    max-width: 450px;
     position: relative;
 }
 
@@ -211,6 +224,7 @@ button[type="submit"] {
     margin-right: 8%;
     cursor: pointer;
     transition: opacity 0.15s;
+    position: relative;
 }
 .cart-button:hover {
     opacity: 0.9;
@@ -227,11 +241,35 @@ button[type="submit"] {
     padding: 10px;
     cursor: pointer;
     transition: opacity 0.15s;
+    position: relative;
 }
 .buy-button:hover {
     opacity: 0.9;
 }
 
+.remove-button {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    font-size: 120%;
+    height: 70px;
+    width: 190px;
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 8%;
+    cursor: pointer;
+    transition: opacity 0.15s;
+    position: relative;
+}
+
+.remove-button:hover {
+    opacity: 0.5;
+}
+
 #add-cart-icon {
     margin-right: 5%;
+}
+
+.login-signup { 
+    position: relative;
 }

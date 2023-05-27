@@ -53,8 +53,14 @@
        <div class="item-buttons">
          <button class="cart-button"><i id="add-cart-icon" class="fa-solid fa-cart-plus fa-lg" style="color: #8c52ff;"></i>Add to cart</button>
          <button class="buy-button">Buy Now</button>
+         <form action="/item/<%= itemId %>" method="POST">
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit" class="remove-button">Remove Item</button>
+         </form>
+         
        </div>
      </div>
+     
    </div>  
  </div>   
  </body>
