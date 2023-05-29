@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 const { mongoClient } = require("mongodb");
-const {userSchema, itemSchema} = require("../db");
+const User = require("../models/userModel")
+const Item = require("../models/itemModel")  
+const Cart = require("../models/cartModel")
 
 const getHome = async (req, res) => {
     let isLoggedIn = req.session.isLoggedIn || false;
     try {
-        const Item = mongoose.model('Item', itemSchema)
         const items = await Item.find().exec();
         res.render('home.ejs', {isLoggedIn, items});
     } catch (error) {
@@ -49,7 +50,6 @@ const getSignup = (req, res) => {
 const getItem = async (req, res) => {
     let isLoggedIn = req.session.isLoggedIn
     const itemId = req.params.id
-    const Item = mongoose.model("Item", itemSchema)
 
     try {
         const itemObj = await Item.findOne({_id: itemId})
@@ -65,10 +65,6 @@ const getItem = async (req, res) => {
         console.log("Error 500, problem getting item")
         res.status(500).send()
     }
-
-    
-    
-    
 }
 
 const getLogout = (req, res) => {
@@ -98,8 +94,6 @@ const postHome = async (req, res) => {
         seller: username
     }
     
-    const Item = mongoose.model('Item', itemSchema)
-    
     try {
         await Item.insertMany([data])
         res.redirect("/")
@@ -116,8 +110,6 @@ const postSignup = async (req, res) => {
         email: req.body.email,
         password: req.body.password
     }
-
-    const User = mongoose.model('User', userSchema)
 
     try {
         const emailTaken = await User.findOne({email: data.email})
@@ -136,7 +128,7 @@ const postSignup = async (req, res) => {
         else {
             console.log('signup successful')
             await User.insertMany([data])
-
+            
             res.redirect('/login')
         }
     }
@@ -147,7 +139,6 @@ const postSignup = async (req, res) => {
 }
 
 const postLogin = async (req, res) => {
-    const User = mongoose.model('User', userSchema)
     try {
         const checkEmail = await User.findOne({email: req.body.email})
 
@@ -172,9 +163,27 @@ const postLogin = async (req, res) => {
     }
 }
 
+// add to cart
+const postCart = async (req, res) => {
+    const itemIdToAdd = req.params.id
+    
+    const data = {
+        username: req.session.username,
+        itemId: itemIdToAdd
+    }
+
+    try {
+        await Cart.create(data)
+        console.log("here")
+        return res.redirect('/')
+    } catch (err) {
+        console.log(`Cant add ${data.itemId} to cart`)
+        res.status(500).send()
+    }
+}
+
 const deleteItem = async (req, res) => {
     const itemIdToRemove = req.params.id
-    const Item = mongoose.model('Item', itemSchema);
 
     Item.findByIdAndRemove(itemIdToRemove)
         .then((removedItem) => {
@@ -204,5 +213,6 @@ module.exports = {
     postHome,
     postSignup,
     postLogin,
+    postCart,
     deleteItem
 }

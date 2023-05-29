@@ -25,12 +25,12 @@
                <form class="search-form">
                    <div class="search-container">
                    <input type="text" placeholder="Search">
-                   <button type="submit"><i class="fa fa-search"></i></button>
+                   <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
                    </div>
                </form>
            </li>
            <li>
-               <a href="#"><i id="cart-icon" class="fa-solid fa-cart-shopping fa-2xl" style="color: #8c52ff;"></i></a>
+               <a href="/cart"><i id="cart-icon" class="fa-solid fa-cart-shopping fa-2xl" style="color: #8c52ff;"></i></a>
            </li>
          </ul>
        </div>
@@ -51,9 +51,11 @@
          <p><%= itemData.description %></p>
        </div>
        <div class="item-buttons">
-         <button class="cart-button"><i id="add-cart-icon" class="fa-solid fa-cart-plus fa-lg" style="color: #8c52ff;"></i>Add to cart</button>
+        <form action="/item/<%= itemId %>/addToCart" method="POST">
+          <button type="submit" class="cart-button"><i id="add-cart-icon" class="fa-solid fa-cart-plus fa-lg" style="color: #8c52ff;"></i>Add to cart</button>
+        </form>
          <button class="buy-button">Buy Now</button>
-         <form action="/item/<%= itemId %>" method="POST">
+         <form action="/item/<%= itemId %>/removeItem" method="POST">
           <input type="hidden" name="_method" value="DELETE">
           <button type="submit" class="remove-button">Remove Item</button>
          </form>

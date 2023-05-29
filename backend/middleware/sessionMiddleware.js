@@ -7,7 +7,7 @@ const sessionMiddleware = session({
   saveUninitialized: false,
   store: MongoStore.create({
     mongoUrl: process.env.URI,
-    ttl: 14 * 24 * 60 * 60,
+    ttl: 1800,
   }),
 });
 
