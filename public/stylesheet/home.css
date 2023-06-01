@@ -151,6 +151,7 @@ input[type="text"] {
     justify-content: center;
     height: 100%;
     width: 100%;
+    cursor:unset;
 }
 
 .item-name {

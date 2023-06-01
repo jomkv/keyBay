@@ -45,20 +45,24 @@
          <p class="item-title"><%= itemData.name %></p>
        </div>
        <div class="item-price">
-         <h1><%= itemData.price %></h1>
+         <h1>₱<%= itemData.price %></h1>
        </div>
        <div class="item-description">
          <p><%= itemData.description %></p>
        </div>
        <div class="item-buttons">
-        <form action="/item/<%= itemId %>/addToCart" method="POST">
-          <button type="submit" class="cart-button"><i id="add-cart-icon" class="fa-solid fa-cart-plus fa-lg" style="color: #8c52ff;"></i>Add to cart</button>
-        </form>
-         <button class="buy-button">Buy Now</button>
+        <% if(isLoggedIn && !owner) { %>
+          <form action="/item/<%= itemId %>/addToCart" method="POST">
+            <button type="submit" class="cart-button"><i id="add-cart-icon" class="fa-solid fa-cart-plus fa-lg" style="color: #8c52ff;"></i>Add to cart</button>
+          </form>
+          <button class="buy-button">Buy Now</button>
+        <% } %>
+        <% if(owner) { %>
          <form action="/item/<%= itemId %>/removeItem" method="POST">
           <input type="hidden" name="_method" value="DELETE">
-          <button type="submit" class="remove-button">Remove Item</button>
+            <button type="submit" class="remove-button">Remove Item</button>
          </form>
+        <% } %>
          
        </div>
      </div>

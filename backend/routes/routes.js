@@ -10,14 +10,15 @@ const {getHome,
     postSignup, 
     postLogin, 
     postCart,
-    deleteItem} 
+    deleteItem,
+    removeCartItem} 
     = require('../controllers/controllers')
 
-router.route('/').get(getHome).post(postHome, () => {
-    console.log("here")
-})
+router.route('/').get(getHome).post(postHome)
 
 router.route('/cart').get(getCart)
+
+router.route('/cart/:id/removeItem').post(removeCartItem)
 
 router.route('/item/:id').get(getItem)
 

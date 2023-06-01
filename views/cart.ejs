@@ -36,40 +36,32 @@
        </div>
     </nav>
     <div class="main-container">
-    <div class="item-parent">
-     <div class="item-pic">
-       <img class="item-img" src="/images/Keychron Q1.jpg">
-     </div>
-     <div class="item-description-container">
-       <div class="item-name">
-         <p class="item-title">Keychron Q1</p>
-       </div>
-       <div class="item-price">
-         <h1>₱8,000</h1>
-       </div>
-       <div class="item-buttons">
-         <button class="remove-button">Remove</button>
-         <button class="buy-button">Check Out</button>
-       </div>
-     </div>
-    </div> 
-    <div class="item-parent">
-      <div class="item-pic">
-        <img class="item-img" src="/images/Keychron Q1.jpg">
-      </div>
-      <div class="item-description-container">
-        <div class="item-name">
-          <p class="item-title">Keychron Q1</p>
+    <% if (items.length === 0) { %>
+      <p>No items in your cart</p>
+    <% } else { %>
+      <% items.forEach(function (item) { %>
+        <div class="item-parent">
+        <div class="item-pic">
+          <img class="item-img" src="/images/Keychron Q1.jpg">
         </div>
-        <div class="item-price">
-          <h1>₱8,000</h1>
+        <div class="item-description-container">
+          <div class="item-name">
+            <p class="item-title"><%= item.itemId.name %></p>
+          </div>
+          <div class="item-price">
+            <h1>₱<%= item.itemId.price %></h1>
+          </div>
+          <div class="item-buttons">
+            <form action="/cart/<%= item._id %>/removeItem" method="POST">
+              <input type="hidden" name="_method" value="DELETE">
+              <button typ="submit" class="remove-button">Remove</button>
+             </form>
+            <button class="buy-button">Check Out</button>
+          </div>
         </div>
-        <div class="item-buttons">
-          <button class="remove-button">Remove</button>
-          <button class="buy-button">Check Out</button>
-        </div>
-      </div>
-     </div>  
-    </div>   
+        </div> 
+      <% }); %>
+    <% } %>
+ 
  </body>
 </html>
