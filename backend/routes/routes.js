@@ -1,18 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const {getHome, 
-    getLogin, 
-    getSignup, 
-    getItem, 
-    getLogout, 
-    getCart, 
-    postHome, 
-    postSignup, 
-    postLogin, 
-    postCart,
-    deleteItem,
-    removeCartItem} 
-    = require('../controllers/controllers')
+const { getHome } = require('../controllers/controllers')
+const { getItem, getCart, postHome, postCart, deleteItem, removeCartItem } = require("../controllers/itemControllers")
+const { getLogin, getSignup, getLogout, postSignup, postLogin } = require("../controllers/userControllers")
 
 router.route('/').get(getHome).post(postHome)
 
