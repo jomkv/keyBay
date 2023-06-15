@@ -17,6 +17,16 @@ const itemSchema = new mongoose.Schema(
         seller:{
             type: String,
             required: true
+        },
+        image: {
+            data: {
+                type: Buffer,
+                required: true
+            },
+            contentType: {
+                type: String,
+                required: true
+            }
         }
     },
     { collection: "items" }

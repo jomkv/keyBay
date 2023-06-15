@@ -1,10 +1,14 @@
 const express = require('express')
 const router = express.Router()
+
+const multer = require("multer")
+const upload = multer()
+
 const { getHome } = require('../controllers/controllers')
 const { getItem, getCart, postHome, postCart, deleteItem, removeCartItem } = require("../controllers/itemControllers")
 const { getLogin, getSignup, getLogout, postSignup, postLogin } = require("../controllers/userControllers")
 
-router.route('/').get(getHome).post(postHome)
+router.route('/').get(getHome).post(upload.single('image') ,postHome)
 
 router.route('/cart').get(getCart)
 

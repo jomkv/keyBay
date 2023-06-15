@@ -1,5 +1,7 @@
 const Item = require("../models/itemModel")  
 const Cart = require("../models/cartModel")
+const multer = require("multer")
+const { isImgValid, cropImage } = require("../helpers/imageHelpers")
 
 const getItem = async (req, res) => {
     let isLoggedIn = req.session.isLoggedIn
@@ -7,23 +9,16 @@ const getItem = async (req, res) => {
 
     try {
         // Get item info
-        const itemObj = await Item.findOne({_id: itemId})
+        const itemData = await Item.findOne({_id: itemId})
 
         let owner = false
         // Check if curr user is the owner 
         if(isLoggedIn)
         {
-            if (itemObj.seller == req.session.username)
+            if (itemData.seller == req.session.username)
             {
                 owner = true
             }
-        }
-        
-        const itemData = {
-            name: itemObj.name,
-            description: itemObj.description,
-            price: itemObj.price,
-            seller: itemObj.seller
         }
 
         res.render('item.ejs', { isLoggedIn, itemData, itemId, owner })
@@ -60,17 +55,42 @@ const getCart = async (req, res) => {
 
 // add item
 const postHome = async (req, res) => {
-    const username = req.session.username
-    const data = {
-        name: req.body.itemName,
-        price: req.body.itemPrice,
-        description: req.body.itemDesc,
-        seller: username
-    }
-    
     try {
-        await Item.insertMany([data])
-        res.redirect("/")
+        const username = req.session.username
+        let originalname, buffer, mimetype;
+        if(req.file) {
+            // Check if image meets minimum requirements
+            if(await isImgValid(req.file, 500, 500)){
+                // Crop image to square (500, 500)
+                const croppedBuffer = await cropImage(req.file.buffer)
+
+                originalname = req.file.originalname
+                buffer = croppedBuffer
+                mimetype = req.file.mimetype
+            }
+            else 
+            {
+                console.log("Image does not meet minimum resolution requirements")
+                return res.redirect('/')
+            }
+
+            const newItem = new Item({
+                name: req.body.itemName,
+                price: req.body.itemPrice,
+                description: req.body.itemDesc,
+                seller: username,
+                image: {
+                    data: buffer,
+                    contentType: mimetype
+                }
+            })
+            await newItem.save()
+            console.log("Item successfuly added")
+            res.redirect("/")
+        } else {
+            console.log("No image detected")
+            return res.redirect('/')
+        }
     } catch(err) {
         console.log("Error 500")
         res.status(500).send()
