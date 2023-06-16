@@ -36,12 +36,13 @@ body {
     background-color: #1F1F1F;
     display: flex;
     flex-direction: column;
-    height: 140px;
+    height: 20%;
     padding-top: 1%;
-    margin-bottom: 1%;
-    min-height: 140px;
-    max-height: 140px;
-    
+    margin-bottom: 3%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 .nav-container2 {
@@ -49,15 +50,14 @@ body {
     color: white;
     justify-content: end;
     padding-right: 1%;
-    position: relative;
 }
 
 .nav-container3 {
     display: flex;
     height: 100%;
-    padding-top: 1%;
-    align-items: start;
-    position: relative;
+    padding: 4%;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .login-signup {
@@ -65,29 +65,22 @@ body {
     color: white;
     padding: 0px 10px;
     cursor: pointer;
-    position: relative;
+}
+
+.logo-container {
+    flex: 1;
+    display: flex;
+    justify-content: start;
 }
 
 .logo {
     max-width: 200px;
-    position: relative;
-}
-
-ul {
-    display: flex;
-    list-style: none;
-    align-items: center;
-    position: relative;
-}
-
-li {
-    margin: 0 20px;
-    position: relative;
 }
 
 .search-li {
-    padding-left: 380px;
-    position: relative;
+    display: flex;
+    justify-content: center;
+    flex: 1;
 }
 
 .search-form {
@@ -95,7 +88,12 @@ li {
     align-items: center;
     position: relative;
     margin: 0 auto;
-    position: relative;
+}
+
+.cart-icon-container {
+    flex:1;
+    display: flex;
+    justify-content: end;
 }
 
 input[type="text"] {
@@ -107,7 +105,7 @@ input[type="text"] {
     font-size: 16px;
 }
 
-.search-btn {
+.search-button {
     background-color: #8C52FF;
     color: white;
     border: none;
@@ -119,10 +117,6 @@ input[type="text"] {
     transform: translateY(-50%);
     font-size: 16px;
     cursor: pointer;
-}
-
-#cart-icon {
-    padding-left: 500px;
 }
 
 .main-container {

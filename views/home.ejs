@@ -8,33 +8,33 @@
   <body>
     <nav class="nav-container">
       <div class="nav-container2 top" >
-       <% if (!isLoggedIn) { %>
-        <a class="login-signup" href="/login"><p>Login</p></a>
-        <p>|</p>
-        <a class="login-signup" href="/signup"><p>Signup</p></a>
-       <% } else { %>
-        <a class="login-signup" href="/logout"><p>Logout</p></a>
-        <p>|</p>
-        <a class="login-signup" href="/profile"><p>Profile</p></a>
-       <% } %>
+        <% if (!isLoggedIn) { %>
+          <a class="login-signup" href="/login"><p>Login</p></a>
+          <p>|</p>
+          <a class="login-signup" href="/signup"><p>Signup</p></a>
+        <% } else { %>
+          <a class="login-signup" href="/logout"><p>Logout</p></a>
+          <p>|</p>
+          <a class="login-signup" href="/profile"><p>Profile</p></a>
+        <% } %>
       </div>
       <div class="nav-container3">
-       <div class="logo-container">
-         <a href="/"><img src="/images/keyBay2.svg" class="logo"></a>
-       </div>
-       <div class="search-li">
-         <form class="search-form" action="/search" method="GET">
-           <div class="search-container">
-           <input type="text" name="query" value="<%= query %>" placeholder="Search">
-           <button class="search-button" type="submit"><i class="fa fa-search"></i></button>
-           </div>
-         </form>
-       </div>
-       <div class="cart-icon-container">
-         <a href="/cart"><i id="cart-icon" class="fa-solid fa-cart-shopping fa-2xl" style="color: #8c52ff;"></i></a>
-       </div>
+        <div class="logo-container">
+          <a href="/"><img src="/images/keyBay2.svg" class="logo"></a>
+        </div>
+        <div class="search-li">
+          <form class="search-form" action="/search" method="GET">
+            <div class="search-container">
+              <input type="text" name="query" value="<%= query %>" placeholder="Search">
+              <button class="search-button" type="submit"><i class="fa fa-search"></i></button>
+            </div>
+          </form>
+        </div>
+        <div class="cart-icon-container">
+          <a href="/cart"><i id="cart-icon" class="fa-solid fa-cart-shopping fa-2xl" style="color: #8c52ff;"></i></a>
+        </div>
       </div>
-     </nav>
+    </nav>
    
     <% if (isLoggedIn) { %>
     <form action="/" method="POST" enctype="multipart/form-data">

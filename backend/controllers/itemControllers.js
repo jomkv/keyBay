@@ -2,6 +2,7 @@ const Item = require("../models/itemModel")
 const Cart = require("../models/cartModel")
 const multer = require("multer")
 const { isImgValid, cropImage } = require("../helpers/imageHelpers")
+const query = ""
 
 const getItem = async (req, res) => {
     let isLoggedIn = req.session.isLoggedIn
@@ -21,7 +22,7 @@ const getItem = async (req, res) => {
             }
         }
 
-        res.render('item.ejs', { isLoggedIn, itemData, itemId, owner })
+        res.render('item.ejs', { isLoggedIn, itemData, itemId, owner, query })
     } catch {
         console.log("Error 500, problem getting item")
         res.status(500).send()
@@ -45,7 +46,7 @@ const getCart = async (req, res) => {
         // Get item's information (owner and itemID) that match the session's username
         const items = await Cart.find({username: un}).populate('itemId')
 
-        res.render("cart.ejs", { isLoggedIn , items })
+        res.render("cart.ejs", { isLoggedIn , items, query })
     }
     catch (err) {
         console.log("Error getting items for cart")
