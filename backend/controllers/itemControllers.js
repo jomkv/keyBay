@@ -1,5 +1,6 @@
 const Item = require("../models/itemModel")  
 const Cart = require("../models/cartModel")
+const User = require("../models/userModel")
 const multer = require("multer")
 const { isImgValid, cropImage } = require("../helpers/imageHelpers")
 const query = ""
@@ -144,6 +145,7 @@ const deleteItem = async (req, res) => {
     }
     catch (error) {
         console.log('Item not found')
+        res.status(500).send()
     }
 
     return res.redirect('/')
@@ -164,9 +166,67 @@ const removeCartItem = async (req,res) => {
     }
     catch (error) {
         console.log('Problem removing cart Item')
+        res.status(500).send()
     }
 
     return res.redirect('/cart')
 }
 
-module.exports = { getItem, getCart, postHome, postCart, deleteItem, removeCartItem }
+const getCheckout = async (req, res) => {
+    try {
+        const itemId = req.params.id
+        const isLoggedIn = req.session.isLoggedIn
+        const item = await Item.findOne({_id: itemId})
+
+        res.render('checkout.ejs', { isLoggedIn, item, itemId, query} )
+    } 
+    catch (error) {
+        console.log('Problem getting checking out')
+        res.status(500).send()
+    }
+}
+
+const postCheckout = async (req, res) => {
+    try {
+        const username = req.session.username
+        const itemId = req.params.id
+
+        const item = await Item.findOne({_id: itemId})
+        const buyer = await User.findOne({username: username})
+        const seller = await User.findOne({username: item.seller})
+
+        // Updates for buyer
+        const newTotalSpent = buyer.itemsBought.total + item.price
+        const newBoughtCount = buyer.itemsBought.count + 1
+
+        await User.updateOne({username: username}, 
+            { $set: 
+                {'itemsBought.total': newTotalSpent, 
+                'itemsBought.count': newBoughtCount}
+            }
+        )
+
+        // Updates for seller
+        const newTotalEarned = seller.itemsSold.total + item.price
+        const newSoldCount = seller.itemsSold.count + 1
+
+        await User.updateOne({username: item.seller}, 
+            { $set: 
+                {'itemsSold.total': newTotalEarned, 
+                'itemsSold.count': newSoldCount}
+            }
+        )
+
+        // Remove item from listing and carts
+        await Item.findByIdAndRemove(itemId)
+        await Cart.deleteMany({itemId: itemId})
+
+        res.redirect('/')
+    } 
+    catch (error) {
+        console.log('Problem checking out')
+        res.status(500).send()
+    }
+}
+
+module.exports = { getItem, getCart, postHome, postCart, deleteItem, removeCartItem, getCheckout, postCheckout }

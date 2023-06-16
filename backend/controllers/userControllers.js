@@ -43,7 +43,15 @@ const postSignup = async (req, res) => {
     const data = {
         username: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        itemsBought: {
+            total: 0,
+            count: 0
+        },
+        itemsSold: {
+            total: 0,
+            count: 0
+        }
     }
 
     try {

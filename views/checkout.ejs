@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>keyBay</title>
-    <link rel="stylesheet" href="/stylesheet/cart.css">
+    <link rel="stylesheet" href="/stylesheet/checkout.css">
     <script src="https://kit.fontawesome.com/e3297677e0.js" crossorigin="anonymous"></script>
   </head>
   <body>
@@ -35,33 +35,37 @@
         </div>
       </div>
     </nav>
+
+    
     <div class="main-container">
-    <% if (items.length === 0) { %>
-      <p>No items in your cart</p>
-    <% } else { %>
-      <% items.forEach(function (item) { %>
-        <div class="item-parent">
-        <div class="item-pic">
-          <img class="item-img" src="data:<%= item.itemId.image.contentType %>;base64,<%= item.itemId.image.data.toString('base64') %>">
+    <div class="item-parent">
+     <div class="item-pic">
+       <img class="item-img" src="data:<%= item.image.contentType %>;base64,<%= item.image.data.toString('base64') %>">
+     </div>
+     <div class="item-description-container">
+       <div class="item-name">
+         <p class="item-title">Checkout <%= item.name %></p>
+       </div>
+       <div class="item-price">
+          <h1 id="total">Total: ₱<%= item.price %> </h1>
+          <h1 style="font-size: 120%;">Price: ₱<%= item.price %></h1>
+         <!-- <h1 id="shipping" style="font-size: 120%;">Shipping: ₱30</h1> -->
+       </div>
+       <form action="/checkout/<%= itemId %>" method="POST">
+        <!-- <div class="input-container">
+          <select name="region" id="region">
+            <option value="30">Luzon</option>
+            <option value="40">Visayas</option>
+            <option value="50">Mindanao</option>
+          </select>
+          <input type="text" name="address" id="address" placeholder="Address">
+        </div> -->
+        <div class="item-buttons">
+            <button type="SUBMIT"class="buy-button" id="popupButton">Checkout</button>
         </div>
-        <div class="item-description-container">
-          <div class="item-name">
-            <p class="item-title"><%= item.itemId.name %></p>
-          </div>
-          <div class="item-price">
-            <h1>₱<%= item.itemId.price %></h1>
-          </div>
-          <div class="item-buttons">
-            <form action="/cart/<%= item._id %>/removeItem" method="POST">
-              <input type="hidden" name="_method" value="DELETE">
-              <button typ="submit" class="remove-button">Remove</button>
-             </form>
-            <a href="/checkout/<%= item.itemId._id %>"><button class="buy-button">Check Out</button></a>
-          </div>
-        </div>
-        </div> 
-      <% }); %>
-    <% } %>
- 
+       </form>
+     </div>
+   </div>  
+ </div>  
  </body>
 </html>
