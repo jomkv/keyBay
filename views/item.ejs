@@ -37,38 +37,50 @@
     </nav>
 
     <div class="main-container">
-    <div class="item-parent">
-     <div class="item-pic">
-       <img class="item-img" src="data:<%= itemData.image.contentType %>;base64,<%= itemData.image.data.toString('base64') %>">
-     </div>
-     <div class="item-description-container">
-       <div class="item-name">
-         <p class="item-title"><%= itemData.name %></p>
-       </div>
-       <div class="item-price">
-         <h1>₱<%= itemData.price %></h1>
-       </div>
-       <div class="item-description">
-         <p><%= itemData.description %></p>
-       </div>
-       <div class="item-buttons">
-        <% if(isLoggedIn && !owner) { %>
-          <form action="/item/<%= itemId %>/addToCart" method="POST">
-            <button type="submit" class="cart-button"><i id="add-cart-icon" class="fa-solid fa-cart-plus fa-lg" style="color: #8c52ff;"></i>Add to cart</button>
-          </form>
-          <button class="buy-button">Buy Now</button>
-        <% } %>
-        <% if(owner) { %>
-         <form action="/item/<%= itemId %>/removeItem" method="POST">
-          <input type="hidden" name="_method" value="DELETE">
-            <button type="submit" class="remove-button">Remove Item</button>
-         </form>
-        <% } %>
-         
-       </div>
-     </div>
-     
-   </div>  
- </div>   
+      <div class="item-parent">
+        <div class="item-pic">
+          <img class="item-img" src="data:<%= itemData.image.contentType %>;base64,<%= itemData.image.data.toString('base64') %>">
+        </div>
+      
+        <div class="item-description-container">
+          <div class="one">
+            <div class="item-name">
+              <p class="item-title"><%= itemData.name %></p>
+            </div>
+            <div class="item-price">
+              <h1>₱<%= itemData.price %></h1>
+            </div>
+            <% if(owner) { %>
+              <p>You are the seller</p>
+            <% } else { %>
+              <p>Seller: <%= itemData.seller %></p>
+            <% } %>
+          </div>
+
+          <div class="two">
+            <div class="item-description">
+              <p><%= itemData.description %></p>
+            </div>
+          </div>
+          
+          <div class="item-buttons">
+            <% if (isLoggedIn && !owner) { %>
+              <% if (!inCart) { %>
+                <form action="/item/<%= itemId %>/addToCart" method="POST">
+                  <button type="submit" class="cart-button"><i id="add-cart-icon" class="fa-solid fa-cart-plus fa-lg" style="color: #8c52ff;"></i>Add to cart</button>
+                </form>
+              <% } %>
+              <a href="/checkout/<%= itemId %>"><button class="buy-button">Buy Now</button></a>
+            <% } %>
+            <% if(owner) { %>
+            <form action="/item/<%= itemId %>/removeItem" method="POST">
+              <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="remove-button">Remove Item</button>
+            </form>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
  </body>
 </html>

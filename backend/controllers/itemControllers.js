@@ -22,7 +22,11 @@ const getItem = async (req, res) => {
             }
         }
 
-        res.render('item.ejs', { isLoggedIn, itemData, itemId, owner, query })
+        const cartResult = await Cart.findOne({username: req.session.username, itemId: itemId})
+
+        let inCart = cartResult ? true : false
+
+        res.render('item.ejs', { isLoggedIn, itemData, itemId, owner, query, inCart })
     } catch {
         console.log("Error 500, problem getting item")
         res.status(500).send()
@@ -30,17 +34,16 @@ const getItem = async (req, res) => {
 }
 
 const getCart = async (req, res) => {
+    let isLoggedIn = req.session.isLoggedIn || false;
 
     // If not logged in: redirect to login page
-    let isLoggedIn = req.session.isLoggedIn || false;
     if(!req.session.isLoggedIn) {
         let errorMessage;
         return res.render("login.ejs", {errorMessage})
     }
 
-    // If logged in, render cart menu with items in your cart
+    // If logged in
     try {
-        // Get username of curr session
         const un = req.session.username
 
         // Get item's information (owner and itemID) that match the session's username
@@ -109,8 +112,9 @@ const postCart = async (req, res) => {
 
     try {
         await Cart.create(data)
-        console.log("here")
-        return res.redirect('/')
+
+        // redirect to current item
+        return res.redirect(`/item/${itemIdToAdd}`)
     } catch (err) {
         console.log(`Cant add ${data.itemId} to cart`)
         res.status(500).send()
