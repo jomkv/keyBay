@@ -7,32 +7,34 @@
   </head>
   <body>
     <nav class="nav-container">
-       <div class="nav-container2 top" >
-        <% if (isLoggedIn) { %>
-         <a class="login-signup" href="/logout"><p>Logout</p></a>
-        <% } else { %>
-          <a class="login-signup" href="/login"><p>Login</p></a>
-          <p>|</p>
-          <a class="login-signup" href="/signup"><p>Signup</p></a>
-        <% } %>
+      <div class="nav-container2 top" >
+       <% if (!isLoggedIn) { %>
+        <a class="login-signup" href="/login"><p>Login</p></a>
+        <p>|</p>
+        <a class="login-signup" href="/signup"><p>Signup</p></a>
+       <% } else { %>
+        <a class="login-signup" href="/logout"><p>Logout</p></a>
+        <p>|</p>
+        <a class="login-signup" href="/profile"><p>Profile</p></a>
+       <% } %>
+      </div>
+      <div class="nav-container3">
+       <div class="logo-container">
+         <a href="/"><img src="/images/keyBay2.svg" class="logo"></a>
        </div>
-       <div class="nav-container3">
-         <ul>
-           <li><img src="/images/keyBay2.svg" class="logo"></li>
-           <li class="search-li">
-               <form class="search-form">
-                   <div class="search-container">
-                   <input type="text" placeholder="Search">
-                   <button class="search-button" type="submit"><i class="fa fa-search"></i></button>
-                   </div>
-               </form>
-           </li>
-           <li>
-               <a href="/cart"><i id="cart-icon" class="fa-regular fa-cart-shopping fa-2xl" style="color: #8c52ff;"></i></a>
-           </li>
-         </ul>
+       <div class="search-li">
+         <form class="search-form" action="/search" method="GET">
+           <div class="search-container">
+           <input type="text" name="query" value="<%= query %>" placeholder="Search">
+           <button class="search-button" type="submit"><i class="fa fa-search"></i></button>
+           </div>
+         </form>
        </div>
-    </nav>
+       <div class="cart-icon-container">
+         <a href="/cart"><i id="cart-icon" class="fa-solid fa-cart-shopping fa-2xl" style="color: #8c52ff;"></i></a>
+       </div>
+      </div>
+     </nav>
    
     <% if (isLoggedIn) { %>
     <form action="/" method="POST" enctype="multipart/form-data">
@@ -65,15 +67,13 @@
     <p>No items found</p>
    <% } else { %>
     <% items.forEach( function(item) { %>
-     <div class="item-container">
-       <a href="/item/<%= item._id %>">
-       <div class="item">
-           <img src="data:<%= item.image.contentType %>;base64,<%= item.image.data.toString('base64') %>">
-           <p class="item-name"><%= item.name %></p>
-           <p class="item-price">₱<%= item.price %></p>
-       </div>
-       </a> 
-     </div>
+      <div class="item-container">
+        <a class="item-link-container"href="/item/<%= item._id %>">
+          <img class="item-img" src="data:<%= item.image.contentType %>;base64,<%= item.image.data.toString('base64') %>">
+          <p class="item-name"><%= item.name %></p>
+          <p class="item-price">₱<%= item.price %></p>
+        </a> 
+      </div>
    <% }); %>
   <% } %>
    </div>  

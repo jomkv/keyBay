@@ -36,12 +36,13 @@ body {
     background-color: #1F1F1F;
     display: flex;
     flex-direction: column;
-    height: 140px;
+    height: 20%;
     padding-top: 1%;
     margin-bottom: 3%;
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 1000;
 }
 
 .nav-container2 {
@@ -54,8 +55,9 @@ body {
 .nav-container3 {
     display: flex;
     height: 100%;
-    padding-top: 1%;
-    align-items: start;
+    padding: 4%;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .login-signup {
@@ -65,22 +67,20 @@ body {
     cursor: pointer;
 }
 
+.logo-container {
+    flex: 1;
+    display: flex;
+    justify-content: start;
+}
+
 .logo {
     max-width: 200px;
 }
 
-ul {
-    display: flex;
-    list-style: none;
-    align-items: center;
-}
-
-li {
-    margin: 0 20px;
-}
-
 .search-li {
-    padding-left: 380px;
+    display: flex;
+    justify-content: center;
+    flex: 1;
 }
 
 .search-form {
@@ -88,7 +88,12 @@ li {
     align-items: center;
     position: relative;
     margin: 0 auto;
-    margin-right: 500px;
+}
+
+.cart-icon-container {
+    flex:1;
+    display: flex;
+    justify-content: end;
 }
 
 input[type="text"] {
@@ -133,25 +138,22 @@ input[type="text"] {
     margin-bottom: 2%;
 }
 
-.item {
+.item-link-container {
     border-radius: 3px;
     padding: 8%;
     cursor: pointer;
     color: white;
-    width: 80%;
-    height: 97%;
+    width: 85%;
+    height: 100%;
     background-color: #1F1F1F;
     display: flex;
     flex-direction: column;
+    position: relative;
+    transition: transform 0.3s ease;
 }
 
-.item-container a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    cursor:unset;
+.item-link-container:hover {
+    transform: translateY(-10px);
 }
 
 .item-name {
@@ -163,6 +165,11 @@ input[type="text"] {
 .item-price {
     color: #FF5733;
     font-size: 140%;
+}
+
+.item-img {
+    height: 100%;
+    width: 100%;
 }
 
 .login-signup:hover {
