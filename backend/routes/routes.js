@@ -6,7 +6,7 @@ const upload = multer()
 
 const { getHome, getSearch } = require('../controllers/controllers')
 const { getItem, getCart, postHome, postCart, deleteItem, removeCartItem, getCheckout, postCheckout } = require("../controllers/itemControllers")
-const { getLogin, getSignup, getLogout, postSignup, postLogin } = require("../controllers/userControllers")
+const { getLogin, getSignup, getLogout, getProfile, postSignup, postLogin } = require("../controllers/userControllers")
 
 router.route('/').get(getHome).post(upload.single('image') ,postHome)
 router.route('/search').get(getSearch)
@@ -14,6 +14,7 @@ router.route('/search').get(getSearch)
 router.route('/login').get(getLogin).post(postLogin)
 router.route('/signup').get(getSignup).post(postSignup)
 router.route('/logout').get(getLogout)
+router.route('/profile').get(getProfile)
 
 // Items
 router.route('/item/:id').get(getItem)

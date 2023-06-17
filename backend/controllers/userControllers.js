@@ -39,6 +39,23 @@ const getLogout = async (req, res) => {
     res.redirect('/')
 }
 
+const getProfile = async (req, res) => {
+    try {
+        if(!req.session.isLoggedIn)
+        {
+            res.redirect('/')
+        }
+
+        const user = await User.findOne({username: req.session.username})
+        const query = ""
+
+        res.render('profile.ejs', {user, query})
+    } catch (error) {
+        console.log("Problem fetching profile")
+        res.status(500).send()
+    }
+}
+
 const postSignup = async (req, res) => {
     const data = {
         username: req.body.username,
@@ -106,4 +123,4 @@ const postLogin = async (req, res) => {
     }
 }
 
-module.exports = { getLogin, getSignup, getLogout, postSignup, postLogin }
+module.exports = { getLogin, getSignup, getLogout, getProfile, postSignup, postLogin }

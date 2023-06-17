@@ -173,6 +173,11 @@ const removeCartItem = async (req,res) => {
 }
 
 const getCheckout = async (req, res) => {
+    if(!req.session.isLoggedIn) 
+    {
+        res.redirect('/')
+    }
+    
     try {
         const itemId = req.params.id
         const isLoggedIn = req.session.isLoggedIn

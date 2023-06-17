@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>keyBay</title>   
+    <link rel="stylesheet" href="stylesheet/profile.css">
+    <script src="https://kit.fontawesome.com/e3297677e0.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <nav class="nav-container">
+      <div class="nav-container2 top" >
+          <a class="login-signup" href="/logout"><p>Logout</p></a>
+          <p>|</p>
+          <a class="login-signup" href="/profile"><p>Profile</p></a>
+      </div>
+      <div class="nav-container3">
+        <div class="logo-container">
+          <a href="/"><img src="/images/keyBay2.svg" class="logo"></a>
+        </div>
+        <div class="search-li">
+          <form class="search-form" action="/search" method="GET">
+            <div class="search-container">
+              <input type="text" name="query" value="<%= query %>" placeholder="Search">
+              <button class="search-button" type="submit"><i class="fa fa-search"></i></button>
+            </div>
+          </form>
+        </div>
+        <div class="cart-icon-container">
+          <a href="/cart"><i id="cart-icon" class="fa-solid fa-cart-shopping fa-2xl" style="color: #8c52ff;"></i></a>
+        </div>
+      </div>
+    </nav>
+    <div class="main-container">
+      <img class="profile-icon" src="images/profile-user.png">
+      <h1 style="color: #1F1F1F;"><%= user.username %></h1>
+      <div class="profile-stats">
+        <div class="stats-desc-container">
+          <i id="spent-icon" class="fa-solid fa-money-bill fa-2xl"></i>
+          <p class="stats-desc"> Spent: </p> 
+          <p class="stats">₱<%= user.itemsBought.total %></p>
+        </div>
+        
+        <div class="stats-desc-container">
+          <i id="spent-icon" class="fa-solid fa-money-bill fa-2xl"></i>
+          <p class="stats-desc"> Items Bought: </p> 
+          <p class="stats"><%= user.itemsBought.count %></p>
+        </div>
+      </div>
+      <div class="profile-stats">
+        <div class="stats-desc-container">
+          <i class="fa-solid fa-money-bill-trend-up fa-2xl"></i>
+          <p class="stats-desc"> Earned: </p> 
+          <p class="stats">₱<%= user.itemsSold.total %></p>
+        </div>
+        <div class="stats-desc-container">
+          <i class="fa-solid fa-money-bill-trend-up fa-2xl"></i>
+          <p class="stats-desc"> Items Sold: </p> 
+          <p class="stats"><%= user.itemsBought.count %></p>
+        </div>
+      </div>
+    </div> 
+ </body>
+</html>
