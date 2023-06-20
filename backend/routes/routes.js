@@ -5,7 +5,7 @@ const multer = require("multer")
 const upload = multer()
 
 const { getHome, getSearch } = require('../controllers/controllers')
-const { getItem, getCart, postHome, postCart, deleteItem, removeCartItem, getCheckout, postCheckout } = require("../controllers/itemControllers")
+const { getItem, getCart, postHome, postCart, deleteItem, removeCartItem, getCheckout, postCheckout, postCheckoutAll } = require("../controllers/itemControllers")
 const { getLogin, getSignup, getLogout, getProfile, postSignup, postLogin } = require("../controllers/userControllers")
 
 router.route('/').get(getHome).post(upload.single('image') ,postHome)
@@ -23,6 +23,7 @@ router.route('/item/:id/addToCart').post(postCart)
 
 // Checkout 
 router.route('/checkout/:id').get(getCheckout).post(postCheckout)
+router.route('/checkoutAll').post(postCheckoutAll)
 
 // Cart
 router.route('/cart').get(getCart)

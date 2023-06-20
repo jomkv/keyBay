@@ -47,25 +47,40 @@
          <p class="item-title">Checkout <%= item.name %></p>
        </div>
        <div class="item-price">
-          <h1 id="total">Total: ₱<%= item.price %> </h1>
+          <h1 id="total">Total: ₱<%= item.price + 30 %> </h1>
           <h1 style="font-size: 120%;">Price: ₱<%= item.price %></h1>
-         <!-- <h1 id="shipping" style="font-size: 120%;">Shipping: ₱30</h1> -->
+         <h1 id="shipping" style="font-size: 120%;">Shipping: ₱30</h1>
        </div>
        <form action="/checkout/<%= itemId %>" method="POST">
-        <!-- <div class="input-container">
+        <div class="input-container">
           <select name="region" id="region">
             <option value="30">Luzon</option>
             <option value="40">Visayas</option>
             <option value="50">Mindanao</option>
           </select>
-          <input type="text" name="address" id="address" placeholder="Address">
-        </div> -->
+          <textarea rows="2" cols="35" maxlength="200" class="desc-input" id="address" name="address" placeholder="Address" required></textarea>
+        </div>
         <div class="item-buttons">
             <button type="SUBMIT"class="buy-button" id="popupButton">Checkout</button>
         </div>
        </form>
      </div>
    </div>  
- </div>  
+   <script>
+    let regionEl = document.getElementById("region")
+    let shippingEl = document.getElementById("shipping")
+    let totalEl = document.getElementById("total")
+
+
+    regionEl.addEventListener("change", function() {
+        shippingEl.innerHTML = "Shipping: ₱" + regionEl.value
+
+        // total
+        let itemPrice = parseInt(<%= item.price %>) 
+        let shippingPrice = parseInt(parseInt(regionEl.value))
+        let total = itemPrice + shippingPrice
+        totalEl.innerHTML = "Price: ₱" + total
+    })
+   </script>
  </body>
 </html>

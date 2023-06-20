@@ -35,28 +35,28 @@
         </div>
       </div>
     </nav>
-   
+    
     <% if (isLoggedIn) { %>
-    <form action="/" method="POST" enctype="multipart/form-data">
       <div class="button-container">
         <button id="popupButton"><i  class="fa-sharp fa-solid fa-plus fa-2xl"  id="add-icon" style="color: #8c52ff;"></i></button>
       </div>
-      <div id="popup">
-        <div id="popupContent">
-          <div class="popup-head">
-            <button id="closeButton"><i class="fa-solid fa-xmark fa-2xl" style="color: #8c52ff;"></i></button>
-          </div>
-          <div class="popup-content-container">
-            <input type="text" class="popup-input" id="itemName" name="itemName" placeholder="Item Name" required>
-            <input type="number" class="popup-input" id="itemPrice" name="itemPrice" placeholder="Price" required>
-            <textarea rows="3" cols="35" maxlength="200" class="desc-input" id="itemDesc" name="itemDesc" placeholder="Description" required></textarea>
-            <input type="file" name="image" accept="image/*">
-            <button type="submit" class="submit-item">Submit</button>
+      <form action="/" method="POST" enctype="multipart/form-data">
+        <div id="popup">
+          <div id="popupContent">
+            <div class="popup-head">
+              <button id="closeButton"><i class="fa-solid fa-xmark fa-2xl" style="color: #8c52ff;"></i></button>
+            </div>
+            <div class="popup-content-container">
+              <input type="text" class="popup-input" id="itemName" name="itemName" placeholder="Item Name" required>
+              <input type="number" class="popup-input" id="itemPrice" name="itemPrice" placeholder="Price" required>
+              <textarea rows="3" cols="35" maxlength="200" class="desc-input" id="itemDesc" name="itemDesc" placeholder="Description" required></textarea>
+              <input type="file" name="image" accept="image/*">
+              <button type="submit" class="submit-item">Submit</button>
+            </div>
           </div>
         </div>
-      </div>
-    </form>
-   <% } %>
+      </form>
+    <% } %>
     
    <% if (!isLoggedIn) { %>
     <div class="item-parent" style="margin-top: 10%;">
@@ -68,7 +68,7 @@
    <% } else { %>
     <% items.forEach( function(item) { %>
       <div class="item-container">
-        <a class="item-link-container"href="/item/<%= item._id %>">
+        <a class="item-link-container" href="/item/<%= item._id %>">
           <img class="item-img" src="data:<%= item.image.contentType %>;base64,<%= item.image.data.toString('base64') %>">
           <p class="item-name"><%= item.name %></p>
           <p class="item-price">₱<%= item.price %></p>

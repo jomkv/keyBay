@@ -2,6 +2,7 @@ const Item = require("../models/itemModel")
 const Cart = require("../models/cartModel")
 const User = require("../models/userModel")
 const multer = require("multer")
+const { updateProfile, updateBuyerShipping } = require("../helpers/updateProfiles")
 const { isImgValid, cropImage } = require("../helpers/imageHelpers")
 const query = ""
 
@@ -49,8 +50,12 @@ const getCart = async (req, res) => {
 
         // Get item's information (owner and itemID) that match the session's username
         const items = await Cart.find({username: un}).populate('itemId')
+        let total = 0
+        items.forEach((item) => {
+            total += item.itemId.price
+        })
 
-        res.render("cart.ejs", { isLoggedIn , items, query })
+        res.render("cart.ejs", { isLoggedIn , items, query, total })
     }
     catch (err) {
         console.log("Error getting items for cart")
@@ -195,32 +200,9 @@ const postCheckout = async (req, res) => {
     try {
         const username = req.session.username
         const itemId = req.params.id
+        const shippingFee = parseInt(req.body.region, 10)
 
-        const item = await Item.findOne({_id: itemId})
-        const buyer = await User.findOne({username: username})
-        const seller = await User.findOne({username: item.seller})
-
-        // Updates for buyer
-        const newTotalSpent = buyer.itemsBought.total + item.price
-        const newBoughtCount = buyer.itemsBought.count + 1
-
-        await User.updateOne({username: username}, 
-            { $set: 
-                {'itemsBought.total': newTotalSpent, 
-                'itemsBought.count': newBoughtCount}
-            }
-        )
-
-        // Updates for seller
-        const newTotalEarned = seller.itemsSold.total + item.price
-        const newSoldCount = seller.itemsSold.count + 1
-
-        await User.updateOne({username: item.seller}, 
-            { $set: 
-                {'itemsSold.total': newTotalEarned, 
-                'itemsSold.count': newSoldCount}
-            }
-        )
+        await updateProfile(username, itemId, shippingFee)
 
         // Remove item from listing and carts
         await Item.findByIdAndRemove(itemId)
@@ -234,4 +216,27 @@ const postCheckout = async (req, res) => {
     }
 }
 
-module.exports = { getItem, getCart, postHome, postCart, deleteItem, removeCartItem, getCheckout, postCheckout }
+const postCheckoutAll = async (req, res) => {
+    try {
+        const username = req.session.username
+        const shippingFee = parseInt(req.body.region, 10)
+        const itemsToCheckout = await Cart.find({username: username}).populate('itemId')
+
+        // checkout items one by one, shipping not applied yet
+        for(item of itemsToCheckout) {
+            await updateProfile(username, item.itemId._id, 0)
+            await Item.findByIdAndRemove(item.itemId._id)
+            await Cart.deleteMany({itemId: item.itemId})
+        }
+
+        // apply shipping fee for buyer
+        await updateBuyerShipping(username, shippingFee)
+
+        res.redirect("/")
+    } catch (error) {
+        console.log("Problem checking out ALL")
+        res.status(500).send()
+    }
+}
+
+module.exports = { getItem, getCart, postHome, postCart, deleteItem, removeCartItem, getCheckout, postCheckout, postCheckoutAll }
