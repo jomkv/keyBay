@@ -36,30 +36,32 @@
       </div>
     </nav>
     <div class="main-container">
-    <form action="/checkoutAll" method="POST">
-      <div class="button-container">
-        <button id="popupButton" class="checkout-all-btn">CHECKOUT ALL</button>
-      </div>
-      <div id="popup">
-        <div id="popupContent">
-          <div class="popup-head">
-            <button id="closeButton"><i class="fa-solid fa-xmark fa-2xl" style="color: #8c52ff;"></i></button>
-          </div>
-          <h1> ARE YOU SURE </h1>
-          <h3 id="total">Total: ₱<%= total + 30 %></h3>
-          <h4 id="shipping">Shipping: ₱30</h4>
-          <div class="popup-content-container">
-            <select name="region" id="region">
-              <option value="30">Luzon</option>
-              <option value="40">Visayas</option>
-              <option value="50">Mindanao</option>
-            </select>
-            <textarea rows="2" cols="35" maxlength="200" class="desc-input" id="address" name="address" placeholder="Address" required></textarea>
-            <button type="submit" class="submit-item">Submit</button>
+    <% if (items.length >= 2) { %>
+      <form action="/checkoutAll" method="POST">
+        <div class="button-container">
+          <button id="popupButton" class="checkout-all-btn">CHECKOUT ALL</button>
+        </div>
+        <div id="popup">
+          <div id="popupContent">
+            <div class="popup-head">
+              <button id="closeButton"><i class="fa-solid fa-xmark fa-2xl" style="color: #8c52ff;"></i></button>
+            </div>
+            <h1> ARE YOU SURE </h1>
+            <h3 id="total">Total: ₱<%= total + 30 %></h3>
+            <h4 id="shipping">Shipping: ₱30</h4>
+            <div class="popup-content-container">
+              <select name="region" id="region">
+                <option value="30">Luzon</option>
+                <option value="40">Visayas</option>
+                <option value="50">Mindanao</option>
+              </select>
+              <textarea rows="2" cols="35" maxlength="200" class="desc-input" id="address" name="address" placeholder="Address" required></textarea>
+              <button type="submit" class="submit-item">Submit</button>
+            </div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
+    <% } %>
     <% if (items.length === 0) { %>
       <p>No items in your cart</p>
     <% } else { %>

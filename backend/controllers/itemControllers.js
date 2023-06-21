@@ -180,7 +180,7 @@ const removeCartItem = async (req,res) => {
 const getCheckout = async (req, res) => {
     if(!req.session.isLoggedIn) 
     {
-        res.redirect('/')
+        return res.redirect('/')
     }
     
     try {

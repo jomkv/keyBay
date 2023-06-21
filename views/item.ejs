@@ -64,14 +64,15 @@
           </div>
           
           <div class="item-buttons">
-            <% if (isLoggedIn && !owner) { %>
-              <% if (!inCart) { %>
+            <% if (!owner) { %>
+              <a href="/checkout/<%= itemId %>"><button class="buy-button">Buy Now</button></a>
+              <% if (!inCart && isLoggedIn) { %>
                 <form action="/item/<%= itemId %>/addToCart" method="POST">
                   <button type="submit" class="cart-button"><i id="add-cart-icon" class="fa-solid fa-cart-plus fa-lg" style="color: #8c52ff;"></i>Add to cart</button>
                 </form>
               <% } %>
-              <a href="/checkout/<%= itemId %>"><button class="buy-button">Buy Now</button></a>
             <% } %>
+            
             <% if(owner) { %>
             <form action="/item/<%= itemId %>/removeItem" method="POST">
               <input type="hidden" name="_method" value="DELETE">

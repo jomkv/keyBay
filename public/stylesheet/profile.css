@@ -161,19 +161,22 @@ input[type="text"] {
 
 .stats-desc {
     font-weight: 850;
-    font-size: 220%;
-    width: 100%;
-    margin-left: 5%;
+    font-size: 200%;
+    width: auto;
+    margin-left: 2%;
     white-space: nowrap;
 }
 
 .stats {
-    font-size: 160%;
+    font-size: 150%;
     margin-top: 8px;
-    margin-left: 4%;
+    margin-left: 10px;
     width: 100%;
     color: #8C52FF;
     font-weight: bolder;
     white-space: nowrap;
 }
 
+.icon {
+    width: 13%; 
+}

@@ -34,25 +34,26 @@
       <h1 style="color: #1F1F1F;"><%= user.username %></h1>
       <div class="profile-stats">
         <div class="stats-desc-container">
-          <i id="spent-icon" class="fa-solid fa-money-bill fa-2xl"></i>
+          <!-- <i id="spent-icon" class="fa-solid fa-money-bill fa-2xl"></i> -->
+          <img class="icon" src="/images/moneyOut.png">
           <p class="stats-desc"> Spent: </p> 
           <p class="stats">₱<%= user.itemsBought.total %></p>
         </div>
         
         <div class="stats-desc-container">
-          <i id="spent-icon" class="fa-solid fa-money-bill fa-2xl"></i>
+          <img class="icon" src="/images/boughtCount.png">
           <p class="stats-desc"> Items Bought: </p> 
           <p class="stats"><%= user.itemsBought.count %></p>
         </div>
       </div>
       <div class="profile-stats">
         <div class="stats-desc-container">
-          <i class="fa-solid fa-money-bill-trend-up fa-2xl"></i>
+          <img class="icon" src="/images/moneyIn.png">
           <p class="stats-desc"> Earned: </p> 
           <p class="stats">₱<%= user.itemsSold.total %></p>
         </div>
         <div class="stats-desc-container">
-          <i class="fa-solid fa-money-bill-trend-up fa-2xl"></i>
+          <img class="icon" src="/images/soldCount.png">
           <p class="stats-desc"> Items Sold: </p> 
           <p class="stats"><%= user.itemsSold.count %></p>
         </div>

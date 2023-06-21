@@ -43,7 +43,7 @@ const getProfile = async (req, res) => {
     try {
         if(!req.session.isLoggedIn)
         {
-            res.redirect('/')
+            return res.redirect('/')
         }
 
         const user = await User.findOne({username: req.session.username})
