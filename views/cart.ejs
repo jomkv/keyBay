@@ -16,6 +16,8 @@
           <a class="login-signup" href="/logout"><p>Logout</p></a>
           <p>|</p>
           <a class="login-signup" href="/profile"><p>Profile</p></a>
+          <p>|</p>
+          <a class="login-signup" href="/myItems"><p>My Items</p></a>
         <% } %>
       </div>
       <div class="nav-container3">
@@ -44,19 +46,19 @@
         <div id="popup">
           <div id="popupContent">
             <div class="popup-head">
-              <button id="closeButton"><i class="fa-solid fa-xmark fa-2xl" style="color: #8c52ff;"></i></button>
+              <button id="closeButton"><p>x</p></button>
             </div>
-            <h1> ARE YOU SURE </h1>
-            <h3 id="total">Total: ₱<%= total + 30 %></h3>
-            <h4 id="shipping">Shipping: ₱30</h4>
             <div class="popup-content-container">
+              <p class="info1">Your total is</p>
+              <p class="info" id="total"><span style="color: #FF5733;">₱<%= total + 30 %></span></p>
+              <p class="info-shipping" id="shipping">Shipping: <span style="color: #FF5733;">₱30</span></p>
               <select name="region" id="region">
                 <option value="30">Luzon</option>
                 <option value="40">Visayas</option>
                 <option value="50">Mindanao</option>
               </select>
               <textarea rows="2" cols="35" maxlength="200" class="desc-input" id="address" name="address" placeholder="Address" required></textarea>
-              <button type="submit" class="submit-item">Submit</button>
+              <button type="submit" class="submit-item">Checkout</button>
             </div>
           </div>
         </div>
@@ -66,26 +68,29 @@
       <p>No items in your cart</p>
     <% } else { %>
       <% items.forEach(function (item) { %>
-        <div class="item-parent">
-        <div class="item-pic">
-          <img class="item-img" src="data:<%= item.itemId.image.contentType %>;base64,<%= item.itemId.image.data.toString('base64') %>">
+        <div class="parent-parent">
+          <div class="item-parent">
+            <div class="item-pic">
+              <img class="item-img" src="data:<%= item.itemId.image.contentType %>;base64,<%= item.itemId.image.data.toString('base64') %>">
+            </div>
+            <div class="item-description-container">
+              <div class="remove-container">
+                <form action="/cart/<%= item._id %>/removeItem" method="POST">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <button class="remove-cart-item">X</button>
+                </form>
+              </div>
+              <div class="item-name">
+                <p class="item-title"><%= item.itemId.name %></p>
+              </div>
+              <div class="item-price">
+                <h1>₱<%= item.itemId.price %></h1>
+              </div>
+              <a href="/item/<%= item.itemId._id %>"><button id="view-button" class="buy-button">View</button></a>
+              <a href="/checkout/<%= item.itemId._id %>"><button class="buy-button">Check Out</button></a>
+            </div>
+          </div> 
         </div>
-        <div class="item-description-container">
-          <div class="item-name">
-            <p class="item-title"><%= item.itemId.name %></p>
-          </div>
-          <div class="item-price">
-            <h1>₱<%= item.itemId.price %></h1>
-          </div>
-          <div class="item-buttons">
-            <form action="/cart/<%= item._id %>/removeItem" method="POST">
-              <input type="hidden" name="_method" value="DELETE">
-              <button typ="submit" class="remove-button">Remove</button>
-             </form>
-            <a href="/checkout/<%= item.itemId._id %>"><button class="buy-button">Check Out</button></a>
-          </div>
-        </div>
-        </div> 
       <% }); %>
     <% } %>
     <script src="/scripts/home.js"></script>
@@ -96,13 +101,13 @@
   
   
       regionEl.addEventListener("change", function() {
-          shippingEl.innerHTML = "Shipping: ₱" + regionEl.value
+          shippingEl.innerHTML = 'Shipping: <span class="checkout-all-price">₱' + regionEl.value + '</span>'
   
           // total
           let itemPrice = parseInt(<%= total %>) 
           let shippingPrice = parseInt(parseInt(regionEl.value))
           let total = itemPrice + shippingPrice
-          totalEl.innerHTML = "Total: ₱" + total
+          totalEl.innerHTML = '<span class="checkout-all-price">₱' + total + '</span>'
       })
      </script>
   </body>

@@ -16,6 +16,8 @@
           <a class="login-signup" href="/logout"><p>Logout</p></a>
           <p>|</p>
           <a class="login-signup" href="/profile"><p>Profile</p></a>
+          <p>|</p>
+          <a class="login-signup" href="/myItems"><p>My Items</p></a>
         <% } %>
       </div>
       <div class="nav-container3">
@@ -35,10 +37,22 @@
         </div>
       </div>
     </nav>
-    
+
     <% if (isLoggedIn) { %>
-      <div class="button-container">
-        <button id="popupButton"><i  class="fa-sharp fa-solid fa-plus fa-2xl"  id="add-icon" style="color: #8c52ff;"></i></button>
+      <% if (bought) { %>
+        <div class="popup center">
+          <div class="icon">
+            <image class="check-icon" src="/images/checkCircle.png">
+            <div class="title">Purchase Success!</div>
+          </div>
+          <div class="dismiss-btn">
+            <button id="dismiss-popup-btn">Dismiss</button>
+          </div>
+        </div>
+      <% } %>  
+
+      <div class="button-container" >
+        <p id="popupButton" class="add-item-label">Add Item <i class="fa-sharp fa-solid fa-plus fa-2xl"  id="add-icon" style="color: #8c52ff;"></i></p>
       </div>
       <form action="/" method="POST" enctype="multipart/form-data">
         <div id="popup">
@@ -50,14 +64,15 @@
               <input type="text" class="popup-input" id="itemName" name="itemName" placeholder="Item Name" required>
               <input type="number" class="popup-input" id="itemPrice" name="itemPrice" placeholder="Price" required>
               <textarea rows="3" cols="35" maxlength="200" class="desc-input" id="itemDesc" name="itemDesc" placeholder="Description" required></textarea>
-              <input type="file" name="image" accept="image/*">
+              
+              <p class="image-label">Upload Image</p>
+              <input class="image-input" type="file" name="image" accept="image/*">
               <button type="submit" class="submit-item">Submit</button>
             </div>
           </div>
         </div>
       </form>
     <% } %>
-    
    <% if (!isLoggedIn) { %>
     <div class="item-parent" style="margin-top: 10%;">
    <% } else { %>

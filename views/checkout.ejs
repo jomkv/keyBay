@@ -16,6 +16,8 @@
           <a class="login-signup" href="/logout"><p>Logout</p></a>
           <p>|</p>
           <a class="login-signup" href="/profile"><p>Profile</p></a>
+          <p>|</p>
+          <a class="login-signup" href="/myItems"><p>My Items</p></a>
         <% } %>
       </div>
       <div class="nav-container3">
@@ -36,7 +38,6 @@
       </div>
     </nav>
 
-    
     <div class="main-container">
     <div class="item-parent">
      <div class="item-pic">
@@ -61,7 +62,7 @@
           <textarea rows="2" cols="35" maxlength="200" class="desc-input" id="address" name="address" placeholder="Address" required></textarea>
         </div>
         <div class="item-buttons">
-            <button type="SUBMIT"class="buy-button" id="popupButton">Checkout</button>
+          <button type="SUBMIT"class="buy-button" id="popupButton">Checkout</button>
         </div>
        </form>
      </div>
@@ -79,7 +80,7 @@
         let itemPrice = parseInt(<%= item.price %>) 
         let shippingPrice = parseInt(parseInt(regionEl.value))
         let total = itemPrice + shippingPrice
-        totalEl.innerHTML = "Price: ₱" + total
+        totalEl.innerHTML = "Total: ₱" + total
     })
    </script>
  </body>

@@ -119,10 +119,61 @@ input[type="text"] {
     cursor: pointer;
 }
 
-.item-parent {
-    padding-top: 2%;
+.main-container {
+    border-radius: 5px;
+    margin-top: 5%;
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 13%;
+}
+
+.item-parent {
+    display: flex;
+    /* align-items: center; */
+    background-color: white;
+    padding: 4%;
+    width: 650px;
+    height: 350px;
+    /* max-width: 1100px; */
+    max-height: 620px;
+    border-radius: 5px;
+    border: 3px solid black;
+    margin-bottom: 3%;
+    margin-right: 5%;
+}
+
+.remove-container {
+    align-self: flex-end;
+    margin-bottom: 9%;
+}
+
+.remove-cart-item {
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    border: 2px solid black;
+    border-radius: 5px;
+    color: white;
+    font-weight: 1000;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.remove-cart-item:hover {
+    opacity: 0.6;
+}
+
+.item-description-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    margin-left: 2%;
+    /* margin-top: 4%; */
+    flex: 1;
+    text-align: center;
 }
   
 .item-container {
@@ -138,37 +189,11 @@ input[type="text"] {
     margin-bottom: 2%;
 }
 
-.item-link-container {
-    border-radius: 3px;
-    padding: 8%;
-    cursor: pointer;
-    color: white;
-    width: 85%;
+.item-pic {
+    width: 70%;
     height: 100%;
-    background-color: #1F1F1F;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    transition: transform 0.3s ease;
-}
-
-.add-item-label {
-    cursor: pointer;
-}
-
-.item-link-container:hover {
-    transform: translateY(-10px);
-}
-
-.item-name {
-    margin-top: 3%;
-    font-weight: bold;
-    font-size: 160%;
-}
-
-.item-price {
-    color: #FF5733;
-    font-size: 140%;
+    border: 3px solid black;
+    flex: 1;
 }
 
 .item-img {
@@ -176,27 +201,111 @@ input[type="text"] {
     width: 100%;
 }
 
+.item-name {
+    font-weight: bold;
+    font-size: 120%;
+    margin-top: 10%;
+}
+
+.info {
+    font-size: 180%;
+    font-weight: bold;
+}
+
+.info-shipping {
+    margin-top: 3%;
+    margin-bottom: 3%;
+    font-size: 130%;
+    font-weight: bolder;
+}
+
+.info1 {
+    font-size: 200%;
+    font-weight: bolder;
+}
+
+.checkout-all-price {
+    color: #e96244;
+}
+
+.item-price {
+    color: #ea927e;
+    font-size: 90%;
+}
+
+.item-title {
+    font-size: 180%;
+}
+
 .login-signup:hover {
     color: #9060ef;
 }
 
-.button-container {
+.item-parent {
+    background-color: #303030;
+    color: white;
+}
+
+.item-buttons {
+    margin-top: 25%;
     display: flex;
-    align-items: center;
-    justify-content: end;
-    padding-right: 3%;
-    margin-top: 12%;
+}
+
+.item-description {
+    margin-top: 4%;
     width: 100%;
+    font-size: 130%
 }
 
-#add-icon {
+.remove-button {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    font-size: 120%;
+    height: 70px;
+    width: 190px;
+    border-radius: 5px;
+    padding: 10px;
+    margin-right: 5%;
     cursor: pointer;
-    margin-left: 5px;
+    transition: opacity 0.15s;
+    border: 2px solid black;
+    margin-bottom: 5%;
+    margin-top: 5%;
 }
 
+#view-button {
+    margin-top: 4%;
+    margin-bottom: 4%;
+    border: 2px solid black;
+    color: #1F1F1F;
+}
 
-button {
-    background-color: transparent;
+.remove-button:hover {
+    opacity: 0.9;
+}
+
+.buy-button {
+    color: #1F1F1F;
+    font-weight: bold;
+    font-size: 120%;
+    height: 70px;
+    width: 190px;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+}
+.buy-button:hover {
+    opacity: 0.9;
+}
+
+.parent-parent {
+    display: flex;
+}
+
+#add-cart-icon {
+    margin-right: 5%;
 }
 
 #popup {
@@ -217,18 +326,12 @@ button {
     transform: translate(-50%, -50%);
     background-color: #D1CDC4;
     padding: 20px;
-    width: 300px;
-    min-height: 270px; /* Updated property to min-height */
+    width: 310px;
+    min-height: 320px; /* Updated property to min-height */
     border-radius: 5px;
     border: 2px solid black;
   }
-
-.add-item-label {
-    color:#8C52FF;
-    font-weight: bolder;
-    font-size: 120%;
-}
-
+  
 .popup-head {
     display: flex;
     justify-content: end;
@@ -244,22 +347,39 @@ button {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 10%;
+}
 
+#closeButton {
+    background-color: red;
+    border: 1px solid black;
+    border-radius: 5px;
+    color: white;
+    font-size: 102%;
+    font-weight: bold;
+    width: 22px;
+    height: 22px;
+    justify-content: center;
+    align-items: center;
+}
+
+#region {
+    font-size: 120%;
 }
 
 .submit-item {
-    background-color: #8C52FF;
+    background-color: #1F1F1F;
     color: white;
     font-weight: bold;
-    width: 70%;
-    height: 45px;
+    width: 60%;
+    height: 60px;
     display: block;
     margin-left: auto;
     margin-right: auto;
     cursor: pointer;
     border-radius: 3px;
     font-size: 110%;
-    margin-top: 10px;
+    margin-top: 7%;
     transition: background-color 0.15s;
 }
 .submit-item:hover {
@@ -272,17 +392,6 @@ button {
     margin: 5% 0%;
 }
 
-.image-input {
-    display: flex;
-    flex-direction: row;
-    margin-left: 25%;
-}
-
-.image-label {
-    margin-top: 6%;
-    font-weight: bold;
-}
-
 #itemPrice {
     padding: 4%;
     font-size: 107%;
@@ -291,7 +400,6 @@ button {
 
 #itemName {
     border-radius: 0px;
-    margin-top: 8%;
 }
 
 .desc-input {
@@ -303,117 +411,26 @@ button {
     max-height: 300px;
 }
 
-.center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999; /* Ensure the popup stays on top */
-}
-
-.popup {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-direction: column;
-    width: 50%;
-    height: 80%;
+.checkout-all-btn {
+    padding: 2% 3%;
+    border-radius: 5px;
+    margin-bottom: 2%;
+    font-size: 125%;
+    background-color: #1F1F1F;
+    color: white;
     position: fixed;
-    padding: 30px 20px;
-    background: #f5f5f5;
-    border-radius: 10px;
-    border: 10px solid black;
-    box-sizing: border-box;
-    z-index: 2;
-    text-align: center;
-    opacity: 0;
-    top: -200%;
-    transform: translate(-50%, -50%) scale(0.5);
-    transition: opacity 300ms ease-in-out,
-                top 1000ms ease-in-out,
-                transform 1000ms ease-in-out;
-}
-
-.popup.active {
-    opacity: 1;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(0.5);
-    transition: transform 300ms cubic-bezier(0.18, 0.89, 0.43, 1.19)
-}
-
-.check-icon {
-    width: 30%;
-}
-
-.popup .title {
-    margin: 5px 0px;
-    font-size: 320%;
-    font-weight: 600
-}
-
-.popup .description {
-    color: #222;
-    font-size: 0%;
-    padding: 5px
-}
-
-.popup .dismiss-btn {
-    margin-top: 15px;
-}
-
-.popup .dismiss-btn button {
-    padding: 10px 20px;
-    background: #111;
-    color: #f5f5f5;
-    border: 2px solid #111;
-    font-size: 250%;
-    font-weight: 600;
-    outline: none;
-    border-radius: 10px;
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 9999; 
+    font-weight: bold;
     cursor: pointer;
-    transition: all 300ms ease-in-out;
+    transition: background-color, 0.15s;
 }
 
-.popup .dismiss-btn button:hover {
-    color: #111;
-    background: #f5f5f5;
+.checkout-all-btn:hover {
+    background-color: #393737;
 }
 
-.popout > div {
-    position: relative;
-    top: 10px;
-    opacity: 0;
+#remove-button {
+    background-color: red;
 }
-
-.popup.active > div {
-    top: 0px;
-    opacity: 1;
-}
-
-.popup.active .icon {
-    transition: all 300ms ease-in-out 250ms;
-}
-
-.popup.active .title {
-    transition: all 300ms ease-in-out 250ms;
-}
-
-.popup.active .description {
-    transition: all 300ms ease-in-out 250ms;
-}
-
-.popup.active .dismiss-btn {
-    transition: all 300ms ease-in-out 250ms;
-    z-index: 9999; /* Ensure the dismiss button stays clickable */
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(10px);
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust the color and opacity as needed */
-    z-index: 9998; /* Place the overlay beneath the popup */
-  }

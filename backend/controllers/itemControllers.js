@@ -147,13 +147,13 @@ const deleteItem = async (req, res) => {
         } else {
             console.log(`No items ${itemIdToRemove} were found in any cart`)
         }
+
+        return res.redirect('/')
     }
     catch (error) {
         console.log('Item not found')
         res.status(500).send()
     }
-
-    return res.redirect('/')
 }
 
 const removeCartItem = async (req,res) => {
@@ -180,7 +180,7 @@ const removeCartItem = async (req,res) => {
 const getCheckout = async (req, res) => {
     if(!req.session.isLoggedIn) 
     {
-        return res.redirect('/')
+        return res.redirect('/login')
     }
     
     try {
@@ -208,10 +208,12 @@ const postCheckout = async (req, res) => {
         await Item.findByIdAndRemove(itemId)
         await Cart.deleteMany({itemId: itemId})
 
-        res.redirect('/')
+        console.log(`Item ${itemId} bought by ${username}`)
+
+        res.redirect(`/?bought=yes`)
     } 
     catch (error) {
-        console.log('Problem checking out')
+        console.log('Problem checking out') 
         res.status(500).send()
     }
 }
@@ -232,7 +234,7 @@ const postCheckoutAll = async (req, res) => {
         // apply shipping fee for buyer
         await updateBuyerShipping(username, shippingFee)
 
-        res.redirect("/")
+        res.redirect("/?bought=yes")
     } catch (error) {
         console.log("Problem checking out ALL")
         res.status(500).send()

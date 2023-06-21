@@ -1,4 +1,6 @@
 const User = require("../models/userModel")
+const Item = require("../models/itemModel")
+const Cart = require("../models/cartModel")
 
 const getLogin = (req, res) => {
     if(req.session.isLoggedIn) {
@@ -52,6 +54,51 @@ const getProfile = async (req, res) => {
         res.render('profile.ejs', {user, query})
     } catch (error) {
         console.log("Problem fetching profile")
+        res.status(500).send()
+    }
+}
+
+const getMyItems = async (req, res) => {
+    if(!req.session.isLoggedIn) {
+        return res.redirect("/login")
+    }
+
+    try {
+        const myItems = await Item.find({seller: req.session.username})
+        const query = ""
+
+        res.render("myItems.ejs", { myItems, query })
+    } catch (error) {
+        console.log("Problem getting user's item menu")
+        res.status(500).send()
+    }
+}
+
+const postRemoveMyItem = async (req, res) => {
+    const itemIdToRemove = req.params.id
+
+    try {
+        // result for removing item
+        const result1 = await Item.findByIdAndRemove(itemIdToRemove)
+        // result for removing item at the carts of users
+        const result2 = await Cart.deleteMany({itemId: itemIdToRemove})
+
+        if(result1) {
+            console.log(`Item ${itemIdToRemove} removed from myItem successfuly`);
+        } else {
+            console.log('Item not found');
+        }
+
+        if(result2.deletedCount > 0) {
+            console.log(`Items ${itemIdToRemove} removed from user's carts`)
+        } else {
+            console.log(`No items ${itemIdToRemove} were found in any cart`)
+        }
+        
+        return res.redirect('/myItems')
+    }
+    catch (error) {
+        console.log('Item not found')
         res.status(500).send()
     }
 }
@@ -123,4 +170,4 @@ const postLogin = async (req, res) => {
     }
 }
 
-module.exports = { getLogin, getSignup, getLogout, getProfile, postSignup, postLogin }
+module.exports = { getLogin, getSignup, getLogout, getProfile, getMyItems, postRemoveMyItem, postSignup, postLogin }

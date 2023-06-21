@@ -30,6 +30,7 @@
 body {
     background-color: #D1CDC4;
     overflow: auto;
+    overflow-x: hidden;
 }
 
 .nav-container {
@@ -125,13 +126,13 @@ input[type="text"] {
 
 .item-parent {
     display: flex;
-    background-color: white;
+    background-color: rgb(216, 211, 211);
     padding: 3%;
     width: 60%;
     max-width: 1100px;
     max-height: 520px;
     border-radius: 5px;
-    border: 3px dashed black;
+    border: 2px solid black;
     margin: auto;
   }
 
@@ -180,6 +181,7 @@ input[type="text"] {
 .item-name {
     font-weight: bold;
     font-size: 160%;
+    color: #1F1F1F;
 }
 
 .item-price {
@@ -242,7 +244,7 @@ input[type="text"] {
 }
 
 .remove-button {
-    background-color: red;
+    background-color: rgb(211, 64, 64);;
     color: white;
     font-weight: bold;
     font-size: 120%;

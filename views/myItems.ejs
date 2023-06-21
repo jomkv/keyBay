@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>keyBay</title>
+    <link rel="stylesheet" href="/stylesheet/myItems.css">
+    <script src="https://kit.fontawesome.com/e3297677e0.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <nav class="nav-container">
+      <div class="nav-container2 top" >
+          <a class="login-signup" href="/logout"><p>Logout</p></a>
+          <p>|</p>
+          <a class="login-signup" href="/profile"><p>Profile</p></a>
+          <p>|</p>
+          <a class="login-signup" href="/myItems"><p style="color: #9060ef;">My Items</p></a>
+      </div>
+      <div class="nav-container3">
+        <div class="logo-container">
+          <a href="/"><img src="/images/keyBay2.svg" class="logo"></a>
+        </div>
+        <div class="search-li">
+          <form class="search-form" action="/search" method="GET">
+            <div class="search-container">
+              <input type="text" name="query" value="<%= query %>" placeholder="Search">
+              <button class="search-button" type="submit"><i class="fa fa-search"></i></button>
+            </div>
+          </form>
+        </div>
+        <div class="cart-icon-container">
+          <a href="/cart"><i id="cart-icon" class="fa-solid fa-cart-shopping fa-2xl" style="color: #8c52ff;"></i></a>
+        </div>
+      </div>
+    </nav>
+    <div class="main-container">
+
+    <% if (myItems.length === 0) { %>
+      <p>You are currently not selling anything</p>
+    <% } else { %>
+      <% myItems.forEach(function (item) { %>
+        <div class="parent-parent">
+          <div class="item-parent">
+            <div class="item-pic">
+              <img class="item-img" src="data:<%= item.image.contentType %>;base64,<%= item.image.data.toString('base64') %>">
+            </div>
+            <div class="item-description-container">
+              <div class="item-name">
+                <p class="item-title"><%= item.name %></p>
+              </div>
+              <div class="item-price">
+                <h1>₱<%= item.price %></h1>
+              </div>
+              
+              <a href="/item/<%= item._id %>"><button style="background-color: rgb(216, 211, 211);" id="view-button" class="buy-button">View</button></a>
+              <form action="/myItems/<%= item._id %>" method="POST">
+                <button style="background-color: rgb(210, 82, 82);" type="submit" id="remove-button" class="buy-button">Remove</button></a>
+              </form>
+            </div>
+          </div> 
+        </div>
+      <% }); %>
+    <% } %>
+  </body>
+</html>
