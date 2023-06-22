@@ -51,9 +51,20 @@
         </div>
       <% } %>  
 
-      <div class="button-container" >
+      <div class="floating-icons">
+        <div id="popupButton" class="floating-icon">
+          <i class="fa-sharp fa-solid fa-plus fa-lg"></i>
+        </div>
+        <a href="/sort">
+          <div class="floating-icon">
+            <i class="fa-solid fa-arrow-down-1-9 fa-2xl"></i>
+          </div>
+        </a>
+      </div>      
+      <!-- <div class="button-container" >
         <p id="popupButton" class="add-item-label">Add Item <i class="fa-sharp fa-solid fa-plus fa-2xl"  id="add-icon" style="color: #8c52ff;"></i></p>
-      </div>
+      </div> -->
+      
       <form action="/" method="POST" enctype="multipart/form-data">
         <div id="popup">
           <div id="popupContent">
@@ -72,11 +83,26 @@
           </div>
         </div>
       </form>
+    <% } else { %>
+      <div class="floating-icons">
+        <a href="sort">
+          <div class="floating-icon">
+            <i class="fa-solid fa-arrow-down-1-9 fa-2xl"></i>
+          </div>
+        </a>
+      </div>   
+    <% } %>
+    <% if(items.length >= 2) { %>
+      <a href="/sort">
+        <div class="floating-icon bottom-icon">
+          <i class="fa-solid fa-arrow-down-1-9 fa-2xl"></i>
+        </div>
+      </a>
     <% } %>
    <% if (!isLoggedIn) { %>
-    <div class="item-parent" style="margin-top: 10%;">
+    <div class="item-parent" style="margin-top: 7%;">
    <% } else { %>
-    <div class="item-parent">
+    <div class="item-parent" style="margin-top: 7%;">
    <% } %>
    <% if (items.length === 0) { %>
     <p>No items found</p>

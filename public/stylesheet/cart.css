@@ -358,7 +358,8 @@ input[type="text"] {
 }
 
 #region {
-    font-size: 120%;
+    font-size: 115%;
+    border: 1px solid black;
 }
 
 .submit-item {
@@ -403,6 +404,7 @@ input[type="text"] {
     max-width: 100%;
     min-width: 100%;
     max-height: 300px;
+    border: 1px solid black;
 }
 
 .checkout-all-btn {

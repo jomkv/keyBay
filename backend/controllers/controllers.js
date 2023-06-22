@@ -32,4 +32,18 @@ const getSearch = async (req, res) => {
     }
 }
 
-module.exports = { getHome, getSearch }
+const getHomeSort = async (req, res) => {
+    let isLoggedIn = req.session.isLoggedIn || false;
+    const query = ""
+    const bought = false
+    try {
+        const items = await Item.find().sort({price: 'asc'}).exec()
+
+        res.render('home.ejs', {isLoggedIn, items, query, bought})
+    } catch(error) {
+        console.log("Error searching for item")
+        res.status(500).send
+    }
+}
+
+module.exports = { getHome, getSearch, getHomeSort }

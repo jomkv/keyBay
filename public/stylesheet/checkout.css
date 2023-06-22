@@ -130,7 +130,7 @@ input[type="text"] {
 .item-parent {
     display: flex;
     /* align-items: center; */
-    background-color: white;
+    background-color: rgb(216, 211, 211);
     padding: 2%;
     width: 70%;
     max-width: 1100px;
@@ -173,6 +173,7 @@ input[type="text"] {
 .item-pic {
     width: auto;
     height: 100%;
+    border: 2px solid black;
 }
 
 .item-img {

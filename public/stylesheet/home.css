@@ -287,11 +287,13 @@ button {
     padding: 4%;
     font-size: 107%;
     height: 23%;
+    border: 1px solid black;
 }
 
 #itemName {
     border-radius: 0px;
     margin-top: 8%;
+    border: 1px solid black;
 }
 
 .desc-input {
@@ -301,6 +303,7 @@ button {
     max-width: 100%;
     min-width: 100%;
     max-height: 300px;
+    border: 1px solid black;
 }
 
 .center {
@@ -417,3 +420,34 @@ button {
     background-color: rgba(0, 0, 0, 0.5); /* Adjust the color and opacity as needed */
     z-index: 9998; /* Place the overlay beneath the popup */
   }
+
+  .floating-icons {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+  }
+  
+  .floating-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #8C52FF;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+  }
+
+  .floating-icon:hover {
+    background-color: #6b35d6;
+  }
+  
+  .floating-icon i {
+    line-height: 1;
+    text-align: center;
+  }
+  
