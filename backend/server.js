@@ -10,7 +10,8 @@ connectDB();
 // app
 const app = express();
 
-// other middlewares go here
+// middleware
+app.use(express.urlencoded({extended: false})); // allow destructuring of req.body
 
 // routes
 app.use("/api/items", require("./routes/itemRoutes"));
