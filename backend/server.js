@@ -1,14 +1,13 @@
-// imports
+require("dotenv").config();
 const express = require("express");
-const dotenv = require("dotenv").config();
-const port = process.env.PORT || 3000;
+
 const { errorHandler } = require("./middleware/errorMiddleware");
 const { connectDB } = require("./config/db");
 
-connectDB();
-
 // app
 const app = express();
+
+connectDB();
 
 // middleware
 app.use(express.urlencoded({extended: false})); // allow destructuring of req.body
@@ -20,6 +19,6 @@ app.use("/api/items", require("./routes/itemRoutes"));
 app.use(errorHandler);
 
 // run server
-app.listen(port, () => {
+app.listen(process.env.PORT, () => {
     console.log("Server now running!");
 });
