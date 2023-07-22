@@ -50,11 +50,18 @@ exports.updateItem = (req, res) => {
 // @desc Delete an item
 // @route DELETE /api/items/:id
 // @access Private
-exports.deleteItem = (req, res) => {
-    res.status(200).json({
-        message: `deleted item ${req.params.id}`
-    });
-};
+exports.deleteItem = asyncHandler(async (req, res) => {
+    const item = await Item.findById(req.params.id);
+
+    if(!item) {
+        res.status(400);
+        throw new Error("Item not found");
+    }
+
+    await Item.deleteOne({ _id: req.params.id });
+
+    res.status(200).json({ id: req.params.id });
+});
 
 function isDigitsOnly(str) {
     for(let i = 0; i < str.length; i++) {
