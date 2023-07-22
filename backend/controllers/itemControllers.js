@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Item = require("../models/itemModel");
+const { validateInput } = require("../helpers/itemHelpers");
 
 // @desc Get ALL items
 // @route GET /api/items
@@ -78,24 +79,3 @@ exports.deleteItem = asyncHandler(async (req, res) => {
     await Item.deleteOne({ _id: req.params.id });
     res.status(200).json({ id: req.params.id });
 });
-
-const isDigitsOnly = (str) => {
-    for(let i = 0; i < str.length; i++) {
-        let result = parseInt(str[i]);
-        if(isNaN(result)) { return false; };
-    };
-    return true;
-};
-
-// n = name, p = price, d = description
-const validateInput = (n, p, d) => {
-    if(!n || !p || !d) {
-        return "Incomplete Input";
-    } else if (!isDigitsOnly(p)) {
-        return "Invalid Input. Price must contain digits only";
-    } else if(d.length > 300) {
-        return "Invalid Input. Description too long";
-    };
-
-    return null;
-};
