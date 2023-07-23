@@ -4,15 +4,15 @@ const itemSchema = mongoose.Schema(
     {
         name:{
             type: String,
-            required: true
+            required: [true, "Please enter name"]
         },
         price:{
             type: Number,
-            required: true
+            required: [true, "Please enter price"]
         },
         description: {
             type: String,
-            required: true
+            required: [true, "Please enter description"]
         }
         // TO ADD: SELLER (OBJECT ID REF)
     },
