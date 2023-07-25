@@ -14,6 +14,7 @@ app.use(express.urlencoded({extended: false})); // allow destructuring of req.bo
 
 // routes
 app.use("/api/items", require("./routes/itemRoutes"));
+app.use("/api/users", require("./routes/userRoutes"));
 
 // error handler middleware
 app.use(errorHandler);
