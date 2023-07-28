@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 
-exports.protect = asyncHandler(async (req, res) => {
+exports.protect = asyncHandler(async (req, res, next) => {
     let token;
 
     // Token is located at header.authorization
