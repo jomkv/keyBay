@@ -19,7 +19,7 @@ exports.protect = asyncHandler(async (req, res) => {
 
             req.user = await User
                 .findById(verifyToken.id)
-                .select(-password); // exclude password
+                .select("-password"); // exclude password
 
             next();
         } catch (error) {
