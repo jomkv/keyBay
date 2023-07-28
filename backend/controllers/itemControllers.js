@@ -71,17 +71,17 @@ exports.updateItem = asyncHandler(async (req, res) => {
 exports.deleteItem = asyncHandler(async (req, res) => {
     const item = await Item.findById(req.params.id);
 
-    // validate if user owns the item
-    if(item.owner.toString() !== req.user._id.toString()) {
-        res.status(401);
-        throw new Error("Not authorized");
-    }
-
     // validate item id
     if(!item) {
         res.status(400);
         throw new Error("Item not found");
     };
+
+    // validate if user owns the item
+    if(item.owner.toString() !== req.user._id.toString()) {
+        res.status(401);
+        throw new Error("Not authorized");
+    }
 
     await Item.deleteOne({ _id: req.params.id });
     res.status(200).json({ id: req.params.id });
