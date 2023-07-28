@@ -5,8 +5,9 @@ const {
     updateItem,
     deleteItem
 } = require("../controllers/itemControllers");
+const { protect } = require("../middleware/authMiddleware")
 
-router.route("/").get(getAllItems).post(addItem);
-router.route("/:id").put(updateItem).delete(deleteItem);
+router.route("/").get(getAllItems).post(protect, addItem);
+router.route("/:id").put(protect, updateItem).delete(protect, deleteItem);
 
 module.exports = router;
