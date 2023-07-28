@@ -11,6 +11,15 @@ exports.getAllItems = asyncHandler(async(req, res) => {
     res.status(200).json(items);
 });
 
+// @desc Get a speficic user's items
+// @route GET /api/items/me
+// @access Private
+exports.getItems = asyncHandler(async(req, res) => {
+    const items = await Item.find({owner: req.user._id});
+    
+    res.status(200).json(items);
+});
+
 // @desc Add an item 
 // @route POST /api/items
 // @access Private
