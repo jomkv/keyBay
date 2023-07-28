@@ -55,6 +55,12 @@ exports.updateItem = asyncHandler(async (req, res) => {
         throw new Error(errorMessage);
     };
 
+    // validate if user owns the item
+    if(item.owner.toString() !== req.user._id.toString()) {
+        res.status(401);
+        throw new Error("Not authorized");
+    }
+
     // update item
     const updatedItem = await Item.findByIdAndUpdate(
         item._id,
