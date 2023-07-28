@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
+const { generateToken } = require("../helpers/userHelpers");
 
 // @desc register user
 // @route POST /api/users
@@ -71,9 +72,3 @@ exports.loginUser = asyncHandler(async (req, res) => {
         throw new Error("Wrong email and/or password");
     }
 });
-
-const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: "30d"
-    });
-};
