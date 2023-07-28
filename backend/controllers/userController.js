@@ -45,6 +45,33 @@ exports.registerUser = asyncHandler(async(req, res) => {
     };
 });
 
+// @desc login user
+// @route POST /api/users/login
+// @access Public
+exports.loginUser = asyncHandler(async (req, res) => {
+    const { email, password } = req.body;
+
+    if( !email || !password ) {
+        res.status(400);
+        throw new Error("Incomplete input");
+    };
+
+    const user = await User.findOne({email: email});
+
+    // validate input
+    if(user && (await bcrypt.compare(password, user.password))) {
+        res.status(200).json({
+            id: user._id,
+            username: user.username, 
+            email: user.email,
+            token: generateToken(user._id)
+        });
+    } else {
+        res.status(400);
+        throw new Error("Wrong email and/or password");
+    }
+});
+
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
         expiresIn: "30d"
