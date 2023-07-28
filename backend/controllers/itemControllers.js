@@ -26,9 +26,10 @@ exports.addItem = asyncHandler(async (req, res) => {
     
     // if fail to make new item, errorHandler middleware will go to work :D
     const newItem = await Item.create({
-        name,
-        price,
-        description
+        owner: req.user._id,
+        name: name,
+        price: price,
+        description: description
     });
 
     res.status(201).json(newItem);

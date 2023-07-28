@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 const itemSchema = mongoose.Schema(
     {
+        owner: {
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: "User", // reference to user collection
+            required: true
+        },
         name:{
             type: String,
             required: [true, "Please enter name"]
