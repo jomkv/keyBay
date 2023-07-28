@@ -14,7 +14,9 @@ exports.registerUser = asyncHandler(async(req, res) => {
         throw new Error("Incomplete input");
     };
 
-    const emailTaken = await User.find({ email: email });
+    // TODO: Add verification for email
+
+    const emailTaken = await User.findOne({ email: email });
     if(emailTaken) {
         res.status(400);
         throw new Error("Email already taken");
