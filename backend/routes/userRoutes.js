@@ -4,6 +4,6 @@ const {
     registerUser,
 } = require("../controllers/userController");
 
-router.route("/").post(protect, registerUser);
+router.route("/").post(registerUser);
 
 module.exports = router;
