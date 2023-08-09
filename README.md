@@ -1,1 +1,1 @@
-API for my personal project keyBay (https://github.com/jomkv/keyBay) 
+keyBay rework. Will be using React instead of EJS on this version.
