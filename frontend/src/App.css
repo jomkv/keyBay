@@ -1,38 +1,120 @@
-.App {
-  text-align: center;
+* {
+  padding: 0px;
+  margin: 0px;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Scroll bar */
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Scroll bar */
+
+body {
+  background-color: #D1CDC4;
+  overflow: auto;
+}
+
+.nav-container {
+  background-color: #1F1F1F;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  height: 20%;
+  padding-top: 1%;
+  margin-bottom: 3%;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.nav-container2 {
+  display: flex;
   color: white;
+  justify-content: end;
+  padding-right: 1%;
 }
 
-.App-link {
-  color: #61dafb;
+.nav-container3 {
+  display: flex;
+  height: 100%;
+  padding: 4%;
+  align-items: center;
+  justify-content: space-between;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login-signup {
+  text-decoration: none;
+  color: white;
+  padding: 0px 10px;
+  cursor: pointer;
+}
+
+.logo-container {
+  flex: 1;
+  display: flex;
+  justify-content: start;
+}
+
+.logo {
+  max-width: 200px;
+}
+
+.search-li {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 0 auto;
+}
+
+.cart-icon-container {
+  flex:1;
+  display: flex;
+  justify-content: end;
+}
+
+input[type="text"] {
+  flex: 1;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 40px 5px 10px;
+  font-size: 16px;
+}
+
+.search-button {
+  background-color: #8C52FF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  cursor: pointer;
 }
