@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // Components
 import Navbar from './components/Navbar'
+import ItemsMenu from './components/ItemsMenu'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       </head>
       <body>
         <Navbar />
+        <ItemsMenu />
       </body>
       
     </>

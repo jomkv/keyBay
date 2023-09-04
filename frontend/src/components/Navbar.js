@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass, faCartShopping, faCar } from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faCartShopping, faBars } from '@fortawesome/free-solid-svg-icons'
 
 // Purple : #8C52FF
 // Cream : #D1CDC4
@@ -9,7 +9,7 @@ import { faMagnifyingGlass, faCartShopping, faCar } from '@fortawesome/free-soli
 
 function Navbar() {
     return (
-        <nav id="mybgcolor" className="navbar navbar-expand-lg">
+        <nav id="mybgcolor" className="navbar sticky-top navbar-expand-lg">
             <div className="container">
                 {/* Logo */}
                 <a className="navbar-brand" href="#">
@@ -17,8 +17,8 @@ function Navbar() {
                 </a>
 
                 {/* Navbar toggle */}
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
+                <button id="navbartogglerbtn" className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <FontAwesomeIcon icon={faBars} style={{color: "#8C52FF",}} />
                 </button>
 
                 {/* Navbar  */}
