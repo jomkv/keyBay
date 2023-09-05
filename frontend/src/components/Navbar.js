@@ -9,7 +9,7 @@ import { faMagnifyingGlass, faCartShopping, faBars } from '@fortawesome/free-sol
 
 function Navbar() {
     return (
-        <nav id="mybgcolor" className="navbar sticky-top navbar-expand-lg">
+        <nav id="mybgcolor" className="navbar w-auto sticky-top navbar-expand-lg">
             <div className="container">
                 {/* Logo */}
                 <a className="navbar-brand" href="#">
